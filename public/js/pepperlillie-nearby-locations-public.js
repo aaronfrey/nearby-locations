@@ -3,7 +3,7 @@
     'use strict';
 
     $(function() {
-        $("#accordion").accordion();
+        $('.accordion').accordion();
     });
 
 })(jQuery);

@@ -2,3 +2,8 @@
  * All of the CSS for your public-facing functionality should be
  * included in this file.
  */
+
+ .pl-nearby-locations-container .accordion-container {
+ 	width: 25%;
+ 	float: left;
+ }
