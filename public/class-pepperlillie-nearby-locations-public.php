@@ -74,6 +74,8 @@ class Pepperlillie_Nearby_Locations_Public {
 	 */
 	public function enqueue_scripts() {
 
+		wp_enqueue_script('google-maps', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDMkqWm3kT5wOXT-400rN7sURd-sFIR2hI', array(), $this->version, false);
+
 		wp_enqueue_script('jquery-ui', 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js', array('jquery'), $this->version, false);
 
 		wp_enqueue_script($this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/pepperlillie-nearby-locations-public.js', array('jquery'), $this->version, false);
