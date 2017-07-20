@@ -61,17 +61,7 @@ class Pepperlillie_Nearby_Locations_Public {
 	 */
 	public function enqueue_styles() {
 
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Pepperlillie_Nearby_Locations_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Pepperlillie_Nearby_Locations_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
+		wp_enqueue_style( 'jquery-ui', 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css', array(), $this->version, 'all' );
 
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/pepperlillie-nearby-locations-public.css', array(), $this->version, 'all' );
 
@@ -84,20 +74,19 @@ class Pepperlillie_Nearby_Locations_Public {
 	 */
 	public function enqueue_scripts() {
 
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Pepperlillie_Nearby_Locations_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Pepperlillie_Nearby_Locations_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
+		wp_enqueue_script('jquery-ui', 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js', array('jquery'), $this->version, false);
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/pepperlillie-nearby-locations-public.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script($this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/pepperlillie-nearby-locations-public.js', array('jquery'), $this->version, false);
 
+	}
+
+	public function pepperlillie_nearby_locations_shortcodes_init() {
+    function pepperlillie_nearby_locations_shortcode($atts = [], $content = null) {
+	    ob_start();
+	    include('partials/pepperlillie-nearby-locations-public-display.php');
+	    return ob_get_clean();
+    }
+    add_shortcode('pepperlillie_nearby_locations', 'pepperlillie_nearby_locations_shortcode');
 	}
 
 }
