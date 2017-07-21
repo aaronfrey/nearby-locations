@@ -10,27 +10,30 @@
     // get locations from the database
     // loop through and populate the map with location markers
     var fetchPlaces = function() {
-        jQuery.ajax({
-            url: '/data/places',
-            dataType: 'json',
-            success: function(response) {
 
-                if (response.status == 'OK') {
-                    places = response.places;
-                    // loop through places and add markers
-                    for (p in places) {
-                        //create gmap latlng obj
-                        tmpLatLng = new google.maps.LatLng(places[p].geo[0], places[p].geo[1]);
-                        // make and place map maker.
-                        var marker = new google.maps.Marker({
-                            map: map,
-                            position: tmpLatLng,
-                            title: places[p].name + "<br>" + places[p].geo_name
-                        });
-                        bindInfoWindow(marker, map, infowindow, '<b>' + places[p].name + "</b><br>" + places[p].geo_name);
-                        // not currently used but good to keep track of markers
-                        markers.push(marker);
-                    }
+        // preparing data for form posting
+        var data = {
+            'action': 'nearby_locations_crud',
+            'callback': 'get_locations'
+        };
+
+        jQuery.ajax({
+            url: myVars.ajaxUrl,
+            dataType: 'json',
+            type: 'post',
+            data: data,
+            cache: false,
+            success: function(response) {
+                places = response;
+                // loop through places and add markers
+                for (var p in places) {
+                    // make and place map maker.
+                    var marker = new google.maps.Marker({
+                        map: map,
+                        position: new google.maps.LatLng(places[p].lat, places[p].lng),
+                        title: places[p].name + "<br>" + places[p].geo_name
+                    });
+                    bindInfoWindow(marker, map, infowindow, '<b>' + places[p].name + "</b><br>" + places[p].formatted);
                 }
             }
         })
@@ -64,7 +67,7 @@
         map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
 
         // fetch the existing places (ajax) and put them on the map
-        //fetchPlaces();
+        fetchPlaces();
     }
 
     // when page is ready, initialize the map!
@@ -92,7 +95,7 @@
 
                     // preparing data for form posting
                     var data = {
-                    	'action': 'nearby_locations_crud',
+                        'action': 'nearby_locations_crud',
                         'callback': 'add_new_location',
                         'lat': results[0].geometry.location.lat(),
                         'lng': results[0].geometry.location.lng(),
