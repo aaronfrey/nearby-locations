@@ -23,17 +23,19 @@
 
 	<label>
 		Location Name
-		<input type="text" name="name" id="name" required>
+		<input class="regular-text" type="text" name="name" id="name" required>
 	</label>
 
 	<label>
 		Location Address
-		<input type="text" name="address" id="address" required>
+		<input class="regular-text" type="text" name="address" id="address" required>
 	</label>
 
-	<button type="submit">Add Location</button>
+	<button class="button button-primary" type="submit">Add Location</button>
 
 </form>
+
+<br>
 
 <div id="realAddress"></div>
 
