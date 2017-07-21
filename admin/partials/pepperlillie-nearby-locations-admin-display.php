@@ -21,16 +21,25 @@
 
 <form id="location-form">
 
-	<label>
-		Location Name
+	<div class="form-control">
+		<label for="name">Location Name</label>
 		<input class="regular-text" type="text" name="name" id="name" required>
-	</label>
+	</div>
 
-	<label>
-		Location Address
+	<div class="form-control">
+		<label for="address">Location Address</label>
 		<input class="regular-text" type="text" name="address" id="address" required>
-	</label>
+	</div>
 
+	<div class="form-control">
+		<label for="type">Location Type</label>
+		<select name="type" id="type" required>
+			<option value="type-1">Type 1</option>
+			<option value="type-2">Type 2</option>
+			<option value="type-3">Type 3</option>
+		</select>
+	</div>
+	
 	<button class="button button-primary" type="submit">Add Location</button>
 
 </form>

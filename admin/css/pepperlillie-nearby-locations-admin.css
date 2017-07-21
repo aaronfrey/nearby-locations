@@ -3,14 +3,29 @@
  * included in this file.
  */
 
-label,
-button {
+.form-control {
     display: block;
-    margin-bottom: 15px;
+    overflow: auto;
+    margin-bottom: 5px;
+}
+
+.form-control label {
+    min-width: 150px;
+    line-height: 27px;
+}
+
+.form-control label,
+.form-control input,
+.form-control select {
+    float: left;
+}
+
+button[type='submit'] {
+    margin: 10px 0 0 150px !important;
 }
 
 .pl-nearby-locations-container {
-	max-width: 95%;
+    max-width: 95%;
     overflow: auto;
     background-color: #00b54e;
 }
@@ -21,7 +36,7 @@ button {
 }
 
 .pl-nearby-locations-container .accordion-container a {
-	text-decoration: none;
+    text-decoration: none;
     color: #fff !important;
     display: block;
 }
@@ -66,8 +81,8 @@ button {
 }
 
 .pl-nearby-locations-container .accordion-container .ui-accordion .ui-accordion-content ul {
-	list-style: disc;
-	margin: 0 0 0 40px;
+    list-style: disc;
+    margin: 0 0 0 40px;
     color: #fff;
 }
 
@@ -80,6 +95,7 @@ button {
     width: 75%;
     float: left;
 }
+
 
 
 /* IMPORTANT - fixes webkit infoWindow rendering */

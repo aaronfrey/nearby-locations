@@ -92,6 +92,15 @@ class Pepperlillie_Nearby_Locations_Admin {
       null,
       'dashicons-location'
     );
+
+		add_submenu_page(
+			plugin_dir_path(__FILE__) . 'partials/pepperlillie-nearby-locations-admin-display.php',
+			'Location Types',
+			'Location Types',
+			'manage_options',
+			plugin_dir_path(__FILE__) . 'partials/pepperlillie-nearby-locations-admin-types-display.php'
+		);
+
 	}	
 
 	public function pepperlillie_nearby_locations_process_ajax() {

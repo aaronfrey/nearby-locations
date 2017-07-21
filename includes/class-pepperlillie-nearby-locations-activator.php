@@ -31,22 +31,37 @@ class Pepperlillie_Nearby_Locations_Activator {
 	 */
 	public static function activate() {
 
+		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+
 		global $wpdb;
 
 		$charset_collate = $wpdb->get_charset_collate();
-		$table_name = $wpdb->prefix . "plnl_locations"; 
 
+		// Create the locations table
+		$table_name = $wpdb->prefix . "plnl_locations"; 
 		$sql = "CREATE TABLE $table_name (
-		  id mediumint(9) NOT NULL AUTO_INCREMENT,
-		  name text NOT NULL,
-		  formatted text NOT NULL,
-		  lat FLOAT(10, 6) NOT NULL,
- 			lng FLOAT(10, 6) NOT NULL,
- 			post_date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+		  `id` mediumint(9) NOT NULL AUTO_INCREMENT,
+		  `section_id` mediumint(9) NOT NULL,
+		  `name` text NOT NULL,
+		  `formatted` text NOT NULL,
+		  `lat` FLOAT(10, 6) NOT NULL,
+ 			`lng` FLOAT(10, 6) NOT NULL,
+ 			`post_date` datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
 		  PRIMARY KEY  (id)
 		) $charset_collate;";
 
-		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+		dbDelta( $sql );
+
+		// Create the sections table
+		$table_name = $wpdb->prefix . "plnl_sections"; 
+
+		$sql = "CREATE TABLE $table_name (
+		  `id` mediumint(9) NOT NULL AUTO_INCREMENT,
+		  `name` text NOT NULL,
+		  `order` mediumint(9) NOT NULL,
+		  PRIMARY KEY  (id)
+		) $charset_collate;";
+
 		dbDelta( $sql );
 
 	}
