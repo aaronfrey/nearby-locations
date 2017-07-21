@@ -14,14 +14,26 @@
 ?>
 
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
+
 <h1>Add locations to display on the map.</h1>
 
-<label>
-	Location Address
-	<input type="text" name="address" id="address">
-</label>
+<div id="message"></div>
 
-<button type="button" id="addressSubmit">Add Location</button>
+<form id="location-form">
+
+	<label>
+		Location Name
+		<input type="text" name="name" id="name" required>
+	</label>
+
+	<label>
+		Location Address
+		<input type="text" name="address" id="address" required>
+	</label>
+
+	<button type="submit">Add Location</button>
+
+</form>
 
 <div id="realAddress"></div>
 

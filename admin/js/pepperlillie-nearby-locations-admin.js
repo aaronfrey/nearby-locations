@@ -2,14 +2,17 @@
 
     'use strict';
 
-    var address,
-        geocoder,
+    var geocoder,
         infowindow,
+        lat,
+        lng,
+        location_address,
+        location_name,
         map,
         places;
 
-    // fetch Places JSON from /data/places
-    // loop through and populate the map with markers
+    // get locations from the database
+    // loop through and populate the map with location markers
     var fetchPlaces = function() {
         jQuery.ajax({
             url: '/data/places',
@@ -73,13 +76,16 @@
 
     $(function() {
 
-        $('#addressSubmit').on('click', function(e) {
+        $('form').submit(function(e) {
+
+            console.log('Submit Form');
 
             e.preventDefault();
 
-            address = $('#address').val();
+            location_name = $('#name').val();
+            location_address = $('#address').val();
 
-            geocoder.geocode({ 'address': address }, function(results, status) {
+            geocoder.geocode({ 'address': location_address }, function(results, status) {
                 if (status == google.maps.GeocoderStatus.OK) {
                     // reposition map to the first returned location
                     map.setCenter(results[0].geometry.location);
@@ -93,6 +99,15 @@
                     //console.log(results[0]);
 
                     bindInfoWindow(marker, map, infowindow, results[0].formatted_address);
+
+                    // preparing data for form posting
+                    lat = results[0].geometry.location.lat();
+                    lng = results[0].geometry.location.lng();
+                    location_name = results[0].formatted_address;
+
+                    // Save the location to the database
+                } else {
+                    $('#message').html('Try again. Geocode was not successful for the following reason: ' + status);
                 }
             });
         });
