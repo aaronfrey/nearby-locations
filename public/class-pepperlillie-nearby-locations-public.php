@@ -64,7 +64,6 @@ class Pepperlillie_Nearby_Locations_Public {
 		wp_enqueue_style( 'jquery-ui', 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css', array(), $this->version, 'all' );
 
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/pepperlillie-nearby-locations-public.css', array(), $this->version, 'all' );
-
 	}
 
 	/**

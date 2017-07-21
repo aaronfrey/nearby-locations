@@ -79,6 +79,10 @@
 
     $(function() {
 
+        $('.accordion').accordion({
+            heightStyle: 'content'
+        });
+
         $('form').submit(function(e) {
 
             e.preventDefault();
@@ -114,8 +118,9 @@
                         data: data,
                         cache: false,
                         success: function(response) {
-                            $('#message').html('Location Saved.');
                             console.log(response);
+                            // reload the page
+                            location.reload();
                         },
                         error: function(response) {
                             $('#message').html('Try again. Saving location was not successful.');
