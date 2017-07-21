@@ -91,7 +91,7 @@
 
                     // preparing data for form posting
                     var data = {
-                    		'action': 'wp_admin_my_action',
+                    	'action': 'wp_admin_my_action',
                         'lat': results[0].geometry.location.lat(),
                         'lng': results[0].geometry.location.lng(),
                         'location_name': $('#name').val(),
