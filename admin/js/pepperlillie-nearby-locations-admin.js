@@ -4,10 +4,6 @@
 
     var geocoder,
         infowindow,
-        lat,
-        lng,
-        location_address,
-        location_name,
         map,
         places;
 
@@ -78,14 +74,9 @@
 
         $('form').submit(function(e) {
 
-            console.log('Submit Form');
-
             e.preventDefault();
 
-            location_name = $('#name').val();
-            location_address = $('#address').val();
-
-            geocoder.geocode({ 'address': location_address }, function(results, status) {
+            geocoder.geocode({ 'address': $('#address').val() }, function(results, status) {
                 if (status == google.maps.GeocoderStatus.OK) {
                     // reposition map to the first returned location
                     map.setCenter(results[0].geometry.location);
@@ -96,16 +87,33 @@
                         position: results[0].geometry.location
                     });
 
-                    //console.log(results[0]);
-
                     bindInfoWindow(marker, map, infowindow, results[0].formatted_address);
 
                     // preparing data for form posting
-                    lat = results[0].geometry.location.lat();
-                    lng = results[0].geometry.location.lng();
-                    location_name = results[0].formatted_address;
+                    var data = {
+                    		'action': 'wp_admin_my_action',
+                        'lat': results[0].geometry.location.lat(),
+                        'lng': results[0].geometry.location.lng(),
+                        'location_name': $('#name').val(),
+                        'formatted_name': results[0].formatted_address
+                    };
 
-                    // Save the location to the database
+                    // save the location to the database
+                    $.ajax({
+                        url: myVars.ajaxUrl,
+                        type: 'post',
+                        data: data,
+                        cache: false,
+                        success: function(response) {
+                            $('#message').html('Location Saved.');
+                            console.log('success');
+                        },
+                        error: function(response) {
+                            $('#message').html('Try again. Saving location was not successful.');
+                            console.log('error');
+                        }
+                    });
+
                 } else {
                     $('#message').html('Try again. Geocode was not successful for the following reason: ' + status);
                 }
