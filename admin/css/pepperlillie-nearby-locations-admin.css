@@ -2,3 +2,21 @@
  * All of the CSS for your admin-specific functionality should be
  * included in this file.
  */
+
+label,
+button {
+    display: block;
+    margin-bottom: 15px;
+}
+
+#map-canvas {
+    height: 600px;
+    width: 65%;
+}
+
+
+/* IMPORTANT - fixes webkit infoWindow rendering */
+
+#map-canvas img {
+    max-width: none;
+}

@@ -58,6 +58,6 @@
     </div>
   </div>
 
-  <div id="map" class="map"></div>
+  <div id="map-canvas" class="map"></div>
 
 </div>

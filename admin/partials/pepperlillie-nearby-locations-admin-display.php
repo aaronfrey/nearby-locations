@@ -14,4 +14,15 @@
 ?>
 
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
-<h1>This is a test admin page.</h1>
+<h1>Add locations to display on the map.</h1>
+
+<label>
+	Location Address
+	<input type="text" name="address" id="address">
+</label>
+
+<button type="button" id="addressSubmit">Add Location</button>
+
+<div id="realAddress"></div>
+
+<div id="map-canvas" class="map"></div>
