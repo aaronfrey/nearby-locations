@@ -2,7 +2,8 @@
 
     'use strict';
 
-    var geocoder,
+    var bounds,
+        geocoder,
         infowindow,
         map,
         places;
@@ -24,6 +25,7 @@
             data: data,
             cache: false,
             success: function(response) {
+                bounds = new google.maps.LatLngBounds();
                 places = response;
                 // loop through places and add markers
                 for (var p in places) {
@@ -33,8 +35,10 @@
                         position: new google.maps.LatLng(places[p].lat, places[p].lng),
                         title: places[p].name + "<br>" + places[p].geo_name
                     });
+                    bounds.extend(marker.getPosition());
                     bindInfoWindow(marker, map, infowindow, '<b>' + places[p].name + "</b><br>" + places[p].formatted);
                 }
+                map.fitBounds(bounds);
             }
         })
     };
