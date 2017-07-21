@@ -90,6 +90,20 @@ class Pepperlillie_Nearby_Locations_Admin {
 	}	
 
 	public function pepperlillie_nearby_locations_process_ajax() {
-
+		if (isset($_POST['callback']) && $_POST['callback'] === 'add_new_location') $this->add_new_location();
+		die();
 	}
+
+  private function add_new_location() {
+    global $wpdb;
+		$table_name = $wpdb->prefix . "plnl_locations"; 
+    $wpdb->insert($table_name, array(
+      'name' => $_POST['location_name'],
+      'formatted' => $_POST['formatted_name'],
+      'lat' => $_POST['lat'],
+      'lng' => $_POST['lng'],
+      'post_date' => date('Y-m-d H:i:s'),
+    ));
+  }
+
 }

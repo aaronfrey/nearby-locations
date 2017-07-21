@@ -155,7 +155,8 @@ class Pepperlillie_Nearby_Locations {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'pepperlillie_nearby_locations_page' );
-		$this->loader->add_action( 'wp_admin_my_action', $plugin_admin, 'pepperlillie_nearby_locations_process_ajax' );
+		$this->loader->add_action( 'wp_ajax_nopriv_nearby_locations_crud', $plugin_admin, 'pepperlillie_nearby_locations_process_ajax' );
+		$this->loader->add_action( 'wp_ajax_nearby_locations_crud', $plugin_admin, 'pepperlillie_nearby_locations_process_ajax' );
 	}
 
 	/**

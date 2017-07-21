@@ -77,6 +77,7 @@
             e.preventDefault();
 
             geocoder.geocode({ 'address': $('#address').val() }, function(results, status) {
+
                 if (status == google.maps.GeocoderStatus.OK) {
                     // reposition map to the first returned location
                     map.setCenter(results[0].geometry.location);
@@ -91,7 +92,8 @@
 
                     // preparing data for form posting
                     var data = {
-                    	'action': 'wp_admin_my_action',
+                    	'action': 'nearby_locations_crud',
+                        'callback': 'add_new_location',
                         'lat': results[0].geometry.location.lat(),
                         'lng': results[0].geometry.location.lng(),
                         'location_name': $('#name').val(),
@@ -106,7 +108,7 @@
                         cache: false,
                         success: function(response) {
                             $('#message').html('Location Saved.');
-                            console.log('success');
+                            console.log(response);
                         },
                         error: function(response) {
                             $('#message').html('Try again. Saving location was not successful.');
