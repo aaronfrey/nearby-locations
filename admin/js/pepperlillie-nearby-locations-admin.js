@@ -60,18 +60,21 @@
             content: ''
         });
 
-        // set some default map details, initial center point, zoom and style
-        var mapOptions = {
-            center: new google.maps.LatLng(39.9523789, -75.1657883),
-            zoom: 12,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
+        if ($('body').hasClass('plugins-nearby-locations-admin-partials-pepperlillie-nearby-locations-admin-display-php')) {
 
-        // create the map and reference the div#map-canvas container
-        map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+            // set some default map details, initial center point, zoom and style
+            var mapOptions = {
+                center: new google.maps.LatLng(39.9523789, -75.1657883),
+                zoom: 12,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
 
-        // fetch the existing places (ajax) and put them on the map
-        fetchPlaces();
+            // create the map and reference the div#map-canvas container
+            map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+
+            // fetch the existing places (ajax) and put them on the map
+            fetchPlaces();
+        }
     }
 
     // when page is ready, initialize the map!
@@ -83,7 +86,38 @@
             heightStyle: 'content'
         });
 
-        $('form').submit(function(e) {
+        $('form#location-type-form').submit(function(e) {
+
+            e.preventDefault();
+
+            // preparing data for form posting
+            var data = {
+                'action': 'nearby_locations_crud',
+                'callback': 'add_new_type',
+                'name': $('#type-name').val(),
+                'order': $('#type-order').val(),
+            };
+
+            // save the location type to the database
+            $.ajax({
+                url: myVars.ajaxUrl,
+                type: 'post',
+                data: data,
+                cache: false,
+                success: function(response) {
+                    console.log(response);
+                    // reload the page
+                    location.reload();
+                },
+                error: function(response) {
+                    console.log(response);
+                    $('#message').html('Try again. Saving location was not successful.');
+                }
+            });
+
+        });
+
+        $('form#location-form').submit(function(e) {
 
             e.preventDefault();
 
@@ -105,6 +139,7 @@
                     var data = {
                         'action': 'nearby_locations_crud',
                         'callback': 'add_new_location',
+                        'section_id': $('#type option:selected').val(),
                         'lat': results[0].geometry.location.lat(),
                         'lng': results[0].geometry.location.lng(),
                         'location_name': $('#name').val(),

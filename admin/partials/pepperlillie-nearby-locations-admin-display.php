@@ -11,11 +11,17 @@
  * @package    Pepperlillie_Nearby_Locations
  * @subpackage Pepperlillie_Nearby_Locations/admin/partials
  */
+
+// Get all of the location types
+global $wpdb;
+$table_name = $wpdb->prefix . "plnl_sections"; 
+$location_types = $wpdb->get_results("SELECT * FROM $table_name ORDER BY `name` ASC", OBJECT);
+
 ?>
 
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
 
-<h1>Add locations to display on the map.</h1>
+<h1>Add Location</h1>
 
 <div id="message"></div>
 
@@ -31,15 +37,17 @@
 		<input class="regular-text" type="text" name="address" id="address" required>
 	</div>
 
+  <?php if ($location_types) : ?>
 	<div class="form-control">
 		<label for="type">Location Type</label>
 		<select name="type" id="type" required>
-			<option value="type-1">Type 1</option>
-			<option value="type-2">Type 2</option>
-			<option value="type-3">Type 3</option>
+      <?php foreach ($location_types as $type) : ?>
+			<option value="<?php echo $type->id; ?>"><?php echo $type->name; ?></option>
+      <?php endforeach; ?>
 		</select>
 	</div>
-	
+  <?php endif; ?>
+
 	<button class="button button-primary" type="submit">Add Location</button>
 
 </form>
