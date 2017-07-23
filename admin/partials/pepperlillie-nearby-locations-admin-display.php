@@ -15,7 +15,15 @@
 // Get all of the location types
 global $wpdb;
 $table_name = $wpdb->prefix . "plnl_sections"; 
-$location_types = $wpdb->get_results("SELECT * FROM $table_name ORDER BY `name` ASC", OBJECT);
+$location_types = $wpdb->get_results("SELECT * FROM $table_name ORDER BY `order` ASC", OBJECT);
+
+$join_table_name = $wpdb->prefix . "plnl_locations"; 
+$locations = $wpdb->get_results("
+  SELECT `locations`.*, `sections`.name `section_name`
+  FROM $table_name `sections`, $join_table_name `locations`
+  WHERE `locations`.`section_id` = `sections`.`id`
+  ORDER BY `sections`.`order` ASC, `locations`.name
+", OBJECT);
 
 ?>
 
@@ -57,44 +65,42 @@ $location_types = $wpdb->get_results("SELECT * FROM $table_name ORDER BY `name` 
 <div class="pl-nearby-locations-container">
 
   <div class="accordion-container">
-    <a href="#" class="toggle-all">ALL</a>
-    <div class="accordion">
-      <h3>Section 1</h3>
-      <div>
-        <ul>
-          <li><a href="#">Location 1</a></li>
-          <li><a href="#">Location 2</a></li>
-          <li><a href="#">Location 3</a></li>
-        </ul>
-      </div>
-      <h3>Section 2</h3>
-      <div>
-        <ul>
-          <li><a href="#">Location 1</a></li>
-          <li><a href="#">Location 2</a></li>
-          <li><a href="#">Location 3</a></li>
-          <li><a href="#">Location 4</a></li>
-          <li><a href="#">Location 5</a></li>
-          <li><a href="#">Location 6</a></li>
-        </ul>
-      </div>
-      <h3>Section 3</h3>
-      <div>
-        <ul>
-          <li><a href="#">Location 1</a></li>
-          <li><a href="#">Location 2</a></li>
-          <li><a href="#">Location 3</a></li>
-        </ul>
-      </div>
-      <h3>Section 4</h3>
-      <div>
-        <ul>
-          <li><a href="#">Location 1</a></li>
-          <li><a href="#">Location 2</a></li>
-          <li><a href="#">Location 3</a></li>
-        </ul>
-      </div>
-    </div>
+
+    <?php if ($locations) : ?>
+
+      <a href="#" class="toggle-all">ALL</a>
+
+      <div class="accordion">
+
+        <?php
+
+        $current_location_type = '';
+
+        foreach ($locations as $idx => $location) :
+
+          if ($location->section_id !== $current_location_type) : $current_location_type = $location->section_id; ?>
+
+            <?php if ($idx !== 0) : ?>
+              </ul></div>
+            <?php endif; ?>
+
+            <h3><?php echo $location->section_name; ?></h3>
+            <div>
+              <ul>
+                <li><a href="#"><?php echo $location->name; ?></a></li>
+
+          <?php else : ?>
+            <li><a href="#"><?php echo $location->name; ?></a></li>
+          <?php endif; ?>
+
+        <?php endforeach; ?>
+
+        </ul></div>
+
+      </div><!-- .accordion -->
+
+    <?php endif; ?>
+
   </div>
 
   <div id="map-canvas" class="map"></div>
