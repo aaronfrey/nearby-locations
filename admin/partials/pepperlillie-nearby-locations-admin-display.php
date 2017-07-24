@@ -87,11 +87,19 @@ $locations = $wpdb->get_results("
             <h3><?php echo $location->section_name; ?></h3>
             <div>
               <ul>
-                <li><a href="#"><?php echo $location->name; ?></a></li>
+                <li>
+                  <a href="#" class="location-link" data-location-index="<?php echo $idx; ?>">
+                    <?php echo $location->name; ?>
+                  </a>
+                </li>
 
-          <?php else : ?>
-            <li><a href="#"><?php echo $location->name; ?></a></li>
-          <?php endif; ?>
+              <?php else : ?>
+                <li>
+                  <a href="#" class="location-link" data-location-index="<?php echo $idx; ?>">
+                    <?php echo $location->name; ?>
+                  </a>
+                </li>
+              <?php endif; ?>
 
         <?php endforeach; ?>
 

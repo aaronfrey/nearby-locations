@@ -5,38 +5,37 @@
     var bounds,
         geocoder,
         infowindow,
-        map,
-        places;
+        locations,
+        markers = [],
+        map;
 
     // get locations from the database
     // loop through and populate the map with location markers
     var fetchPlaces = function() {
 
-        // preparing data for form posting
-        var data = {
-            'action': 'nearby_locations_crud',
-            'callback': 'get_locations'
-        };
-
         jQuery.ajax({
             url: myVars.ajaxUrl,
             dataType: 'json',
             type: 'post',
-            data: data,
+            data: {
+                'action': 'nearby_locations_crud',
+                'callback': 'get_locations'
+            },
             cache: false,
             success: function(response) {
                 bounds = new google.maps.LatLngBounds();
-                places = response;
-                // loop through places and add markers
-                for (var p in places) {
+                locations = response;
+                // loop through locations and add markers
+                for (var l in locations) {
                     // make and place map maker.
                     var marker = new google.maps.Marker({
                         map: map,
-                        position: new google.maps.LatLng(places[p].lat, places[p].lng),
-                        title: places[p].name + "<br>" + places[p].geo_name
+                        position: new google.maps.LatLng(locations[l].lat, locations[l].lng),
+                        title: locations[l].name + "<br>" + locations[l].geo_name
                     });
+                    markers.push(marker);
                     bounds.extend(marker.getPosition());
-                    bindInfoWindow(marker, map, infowindow, '<b>' + places[p].name + "</b><br>" + places[p].formatted);
+                    bindInfoWindow(marker, map, infowindow, '<b>' + locations[l].name + "</b><br>" + locations[l].formatted);
                 }
                 map.fitBounds(bounds);
             }
@@ -167,6 +166,12 @@
                     $('#message').html('Try again. Geocode was not successful for the following reason: ' + status);
                 }
             });
+        });
+
+        $('.location-link').on('click', function(e) {
+            e.preventDefault();
+            var index = $(this).data('location-index');
+            google.maps.event.trigger(markers[index], 'click');
         });
 
     });

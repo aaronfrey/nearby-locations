@@ -141,10 +141,19 @@ class Pepperlillie_Nearby_Locations_Admin {
   }
 
   private function get_locations() {
-  	global $wpdb;
-  	$table_name = $wpdb->prefix . "plnl_locations"; 
-		$results = $wpdb->get_results("SELECT * FROM $table_name", OBJECT);
-		echo json_encode($results);
+		global $wpdb;
+		$table_name = $wpdb->prefix . "plnl_sections"; 
+		$location_types = $wpdb->get_results("SELECT * FROM $table_name ORDER BY `order` ASC", OBJECT);
+
+		$join_table_name = $wpdb->prefix . "plnl_locations"; 
+		$locations = $wpdb->get_results("
+		  SELECT `locations`.*, `sections`.name `section_name`
+		  FROM $table_name `sections`, $join_table_name `locations`
+		  WHERE `locations`.`section_id` = `sections`.`id`
+		  ORDER BY `sections`.`order` ASC, `locations`.name
+		", OBJECT);
+
+		echo json_encode($locations);
   }
 
 }
