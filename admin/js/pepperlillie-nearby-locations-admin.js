@@ -43,12 +43,29 @@
         })
     };
 
+    var arraySearch = function(arr, val) {
+        for (var i = 0; i < arr.length; i++)
+            if (arr[i] === val) return i;
+        return false;
+    }
+
     // binds a map marker and infoWindow together on click
     var bindInfoWindow = function(marker, map, infowindow, html) {
         google.maps.event.addListener(marker, 'click', function() {
             infowindow.setContent(html);
             infowindow.open(map, marker);
+            if (activeMarker !== null) { markers[activeMarker].setAnimation(null); }
+            marker.setAnimation(google.maps.Animation.BOUNCE);
+            activeMarker = arraySearch(markers, marker);
         });
+    }
+
+    var animateMarker = function(index) {
+        if (index !== activeMarker) {
+            if (activeMarker !== null) { markers[activeMarker].setAnimation(null); }
+            markers[index].setAnimation(google.maps.Animation.BOUNCE);
+            activeMarker = index;
+        }
     }
 
     function initialize() {
@@ -58,6 +75,10 @@
         // create the infowindow
         infowindow = new google.maps.InfoWindow({
             content: ''
+        });
+
+        google.maps.event.addListener(infowindow, 'closeclick', function() {
+            markers[activeMarker].setAnimation(null);
         });
 
         if ($('body').hasClass('plugins-nearby-locations-admin-partials-pepperlillie-nearby-locations-admin-display-php')) {
@@ -173,12 +194,7 @@
             e.preventDefault();
             var index = $(this).data('location-index');
             google.maps.event.trigger(markers[index], 'click');
-
-            if (index !== activeMarker) {
-                if (activeMarker !== null) { markers[activeMarker].setAnimation(null); }
-                markers[index].setAnimation(google.maps.Animation.BOUNCE);
-                activeMarker = index;
-            }
+            animateMarker(index);
         });
 
     });
