@@ -2,7 +2,8 @@
 
     'use strict';
 
-    var bounds,
+    var activeMarker = null,
+        bounds,
         geocoder,
         infowindow,
         locations,
@@ -172,6 +173,12 @@
             e.preventDefault();
             var index = $(this).data('location-index');
             google.maps.event.trigger(markers[index], 'click');
+
+            if (index !== activeMarker) {
+                if (activeMarker !== null) { markers[activeMarker].setAnimation(null); }
+                markers[index].setAnimation(google.maps.Animation.BOUNCE);
+                activeMarker = index;
+            }
         });
 
     });
