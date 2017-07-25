@@ -68,7 +68,7 @@ $locations = $wpdb->get_results("
 
     <?php if ($locations) : ?>
 
-      <a href="#" class="toggle-all">ALL</a>
+      <a href="#" id="toggle-all" class="toggle-all">ALL</a>
 
       <div class="accordion">
 
