@@ -60,10 +60,8 @@ class Pepperlillie_Nearby_Locations_Admin {
 	 * @since    1.0.0
 	 */
 	public function enqueue_styles() {
-
-		wp_enqueue_style( 'jquery-ui', 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css', array(), $this->version, 'all' );
-
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/pepperlillie-nearby-locations-admin.css', array(), $this->version, 'all' );
+		wp_enqueue_style('jquery-ui', 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css', array(), $this->version, 'all');
+		wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/pepperlillie-nearby-locations-admin.css', array(), $this->version, 'all');
 	}
 
 	/**
@@ -72,15 +70,13 @@ class Pepperlillie_Nearby_Locations_Admin {
 	 * @since    1.0.0
 	 */
 	public function enqueue_scripts() {
-		
 		wp_enqueue_script('google-maps', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDMkqWm3kT5wOXT-400rN7sURd-sFIR2hI', array(), $this->version, false);
-
 		wp_enqueue_script('jquery-ui', 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js', array('jquery'), $this->version, false);
 
-		wp_enqueue_script($this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/pepperlillie-nearby-locations-admin.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script('shared', plugin_dir_url(dirname(__FILE__)) . 'shared/js/pepperlillie-nearby-locations-shared.js', array('jquery'), $this->version, false);
+		wp_localize_script('shared', 'myVars', array('ajaxUrl' => admin_url('admin-ajax.php')));
 
-		wp_localize_script($this->plugin_name, 'myVars', array('ajaxUrl' => admin_url('admin-ajax.php')));
-		
+		wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/pepperlillie-nearby-locations-admin.js', array('jquery'), $this->version, false);
 	}
 
 	public function pepperlillie_nearby_locations_page() {

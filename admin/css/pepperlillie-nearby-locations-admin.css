@@ -96,10 +96,6 @@ button[type='submit'] {
     float: left;
 }
 
-
-
-/* IMPORTANT - fixes webkit infoWindow rendering */
-
 .pl-nearby-locations-container .map img {
     max-width: none;
 }
