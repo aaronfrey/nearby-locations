@@ -11,7 +11,7 @@
 
 .pl-nearby-locations-container .accordion-container a {
     text-decoration: none;
-    color: #fff !important;
+    color: #fff;
     display: block;
 }
 
@@ -44,7 +44,6 @@
 .pl-nearby-locations-container .accordion-container .ui-accordion .ui-accordion-header .ui-icon {
     float: right;
     margin-top: 1px;
-    color: #fff;
 }
 
 .pl-nearby-locations-container .accordion-container .ui-accordion .ui-accordion-content {
@@ -55,8 +54,6 @@
 }
 
 .pl-nearby-locations-container .accordion-container .ui-accordion .ui-accordion-content ul {
-    list-style: disc;
-    margin: 0 0 0 40px;
     color: #fff;
 }
 

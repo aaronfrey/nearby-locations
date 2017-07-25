@@ -23,3 +23,8 @@
 button[type='submit'] {
     margin: 10px 0 0 150px !important;
 }
+
+.pl-nearby-locations-container .accordion-container .ui-accordion .ui-accordion-content ul {
+    list-style: disc;
+    margin: 0 0 0 40px;
+}
