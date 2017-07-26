@@ -9,6 +9,7 @@
         locations,
         map,
         markers = [],
+        sectionID,
         toggleAll = true;
 
     // return an array key based on value
@@ -21,7 +22,14 @@
 
     // get locations from the database
     // loop through and populate the map with location markers
-    var fetchPlaces = function() {
+    var fetchPlaces = function(sectionID) {
+
+        // if the markers were already returned once
+        if (markers.length) {
+            console.log('markers were already returned');
+            showMarkers(sectionID);
+            return;
+        }
 
         jQuery.ajax({
             url: myVars.ajaxUrl,
@@ -82,6 +90,22 @@
         }
     }
 
+    // hides the markers from the map, but keeps them in the array.
+    var hideMarkers = function() {
+        for (var i = 0; i < markers.length; i++) {
+            console.log('Hide marker: ' + i);
+            markers[i].setVisible(false);
+        }
+    }
+
+    // showd the markers from the map
+    var showMarkers = function(sectionID) {
+        for (var i = 0; i < markers.length; i++) {
+            console.log('Show marker: ' + i);
+            markers[i].setVisible(true);
+        }
+    }
+
     function initialize() {
         // create the geocoder
         geocoder = new google.maps.Geocoder();
@@ -135,11 +159,18 @@
                 "activeHeader": "ui-icon-triangle-1-n"
             },
             beforeActivate: function(event, ui) {
+                // prevent current opened accordion from closing on click unless 'all' is clicked
                 if (!toggleAll && !ui.newHeader.size()) {
                     return false;
                 }
-
                 toggleAll = false;
+
+                // clear all markers
+                hideMarkers();
+
+                // return only the locations for the current section id
+                sectionID = ui.newHeader.data('section-id');
+                fetchPlaces(sectionID);
             }
         });
 
