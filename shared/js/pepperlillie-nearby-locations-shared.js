@@ -8,6 +8,7 @@
         infowindow,
         locations,
         map,
+        markerGroups = {},
         markers = [],
         sectionID,
         toggleAll = true;
@@ -23,13 +24,6 @@
     // get locations from the database
     // loop through and populate the map with location markers
     var fetchPlaces = function(sectionID) {
-
-        // if the markers were already returned once
-        if (markers.length) {
-            console.log('markers were already returned');
-            showMarkers(sectionID);
-            return;
-        }
 
         jQuery.ajax({
             url: myVars.ajaxUrl,
@@ -49,12 +43,19 @@
 
                 // loop through locations and add markers to map
                 for (var l in locations) {
+
                     // make and place map maker
                     var marker = new google.maps.Marker({
                         map: map,
                         position: new google.maps.LatLng(locations[l].lat, locations[l].lng),
                         title: locations[l].name + "<br>" + locations[l].geo_name
                     });
+
+                    if (!(locations[l].section_id in markerGroups)) {
+                        markerGroups[locations[l].section_id] = [];
+                    }
+
+                    markerGroups[locations[l].section_id].push(marker);
                     markers.push(marker);
 
                     // add marker to the contained bounds
@@ -63,6 +64,7 @@
                     // bind click event to show the info box
                     bindInfoWindow(marker, map, infowindow, '<b>' + locations[l].name + "</b><br>" + locations[l].formatted);
                 }
+
                 // readjust the map to fit all the markers at once
                 map.fitBounds(bounds);
             }
@@ -100,9 +102,10 @@
 
     // showd the markers from the map
     var showMarkers = function(sectionID) {
-        for (var i = 0; i < markers.length; i++) {
+        var newMarkers = sectionID ? markerGroups[sectionID] : markers;
+        for (var i = 0; i < newMarkers.length; i++) {
             console.log('Show marker: ' + i);
-            markers[i].setVisible(true);
+            newMarkers[i].setVisible(true);
         }
     }
 
@@ -116,9 +119,9 @@
         });
 
         // add listener to stop marker animation on infobox close
-        google.maps.event.addListener(infowindow, 'closeclick', function() {
-            markers[activeMarker].setAnimation(null);
-        });
+        // google.maps.event.addListener(infowindow, 'closeclick', function() {
+        //     markers[activeMarker].setAnimation(null);
+        // });
 
         if ($('body').find('.pl-nearby-locations-container')) {
 
@@ -147,6 +150,7 @@
             e.preventDefault();
             toggleAll = true;
             $('.ui-accordion-header-active').click();
+            showMarkers();
         });
 
         // initialize the location types accordion 
@@ -167,10 +171,11 @@
 
                 // clear all markers
                 hideMarkers();
+                infowindow.close();
 
                 // return only the locations for the current section id
                 sectionID = ui.newHeader.data('section-id');
-                fetchPlaces(sectionID);
+                showMarkers(sectionID);
             }
         });
 
