@@ -176,6 +176,8 @@
                 // return only the locations for the current section id
                 sectionID = ui.newHeader.data('section-id');
                 showMarkers(sectionID);
+
+                map.fitBounds(bounds);
             }
         });
 
