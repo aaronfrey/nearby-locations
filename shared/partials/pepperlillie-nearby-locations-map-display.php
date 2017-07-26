@@ -11,8 +11,6 @@
 // Get all of the location types
 global $wpdb;
 $table_name = $wpdb->prefix . "plnl_sections"; 
-$location_types = $wpdb->get_results("SELECT * FROM $table_name ORDER BY `order` ASC", OBJECT);
-
 $join_table_name = $wpdb->prefix . "plnl_locations"; 
 $locations = $wpdb->get_results("
   SELECT `locations`.*, `sections`.name `section_name`
@@ -20,6 +18,10 @@ $locations = $wpdb->get_results("
   WHERE `locations`.`section_id` = `sections`.`id`
   ORDER BY `sections`.`order` ASC, `locations`.name
 ", OBJECT);
+
+// echo '<pre>';
+// var_dump($locations);
+// echo '</pre>';
 
 ?>
 
@@ -43,11 +45,14 @@ $locations = $wpdb->get_results("
 
           if ($location->section_id !== $current_location_type) : $current_location_type = $location->section_id; ?>
 
+            <!-- if this is not the first location, close all previous opened tags -->
             <?php if ($idx !== 0) : ?>
               </ul></div>
             <?php endif; ?>
 
-            <h3><?php echo $location->section_name; ?></h3>
+            <h3 data-section-id="<?php echo $location->section_id; ?>">
+              <?php echo $location->section_name; ?>
+            </h3>
             <div>
               <ul>
                 <li>
