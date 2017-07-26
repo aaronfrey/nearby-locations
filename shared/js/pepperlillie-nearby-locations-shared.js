@@ -68,7 +68,7 @@
             infowindow.setContent(html);
             infowindow.open(map, marker);
             // animate the selected marker
-            animateMarker(arraySearch(markers, marker));
+            //animateMarker(arraySearch(markers, marker));
         });
     }
 
@@ -147,7 +147,7 @@
             e.preventDefault();
             var index = $(this).data('location-index');
             google.maps.event.trigger(markers[index], 'click');
-            animateMarker(index);
+            //animateMarker(index);
         });
     });
 
