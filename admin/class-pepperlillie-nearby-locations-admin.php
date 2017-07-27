@@ -100,6 +100,14 @@ class Pepperlillie_Nearby_Locations_Admin {
 			plugin_dir_path(__FILE__) . 'partials/pepperlillie-nearby-locations-admin-types-display.php'
 		);
 
+		add_submenu_page(
+			plugin_dir_path(__FILE__) . 'partials/pepperlillie-nearby-locations-admin-display.php',
+			'Settings',
+			'Settings',
+			'manage_options',
+			plugin_dir_path(__FILE__) . 'partials/pepperlillie-nearby-locations-admin-settings-display.php'
+		);
+
 	}	
 
 	public function pepperlillie_nearby_locations_process_ajax() {

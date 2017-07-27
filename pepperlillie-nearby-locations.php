@@ -13,9 +13,9 @@
  * @package           Pepperlillie_Nearby_Locations
  *
  * @wordpress-plugin
- * Plugin Name:       Pepperlillie Nearby Locations
+ * Plugin Name:       Nearby Locations
  * Plugin URI:        http://www.pepperlillie.com/
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
+ * Description:       Add locations, grouped by categories, to a Google map.
  * Version:           1.0.0
  * Author:            Aaron Frey
  * Author URI:        http://www.pepperlillie.com/
