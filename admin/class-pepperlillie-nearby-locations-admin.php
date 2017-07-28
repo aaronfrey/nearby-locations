@@ -73,7 +73,12 @@ class Pepperlillie_Nearby_Locations_Admin {
 	 * @since    1.0.0
 	 */
 	public function enqueue_scripts() {
-		wp_enqueue_script('google-maps', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDMkqWm3kT5wOXT-400rN7sURd-sFIR2hI', array(), $this->version, false);
+		// get Google Maps API key
+		$api_key = get_option('plnl-google-api-key');
+		if ($api_key) {
+			wp_enqueue_script('google-maps', "https://maps.googleapis.com/maps/api/js?key=$api_key", array(), $this->version, false);
+		}
+
 		wp_enqueue_script('jquery-ui', 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js', array('jquery'), $this->version, false);
 
 		wp_enqueue_script('shared', plugin_dir_url(dirname(__FILE__)) . 'shared/js/pepperlillie-nearby-locations-shared.js', array('jquery'), $this->version, false);
