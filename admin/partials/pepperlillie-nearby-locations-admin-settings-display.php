@@ -9,6 +9,7 @@
  */
 
 $api_key = get_option("plnl-google-api-key");
+$center_address = get_option("plnl-center-address");
 
 ?>
 
@@ -18,10 +19,12 @@ $api_key = get_option("plnl-google-api-key");
 
 <div id="message"></div>
 
+<br>
+
 <form id="settings-form">
 
 	<div class="form-control">
-		<label for="name">Google Maps API Key</label>
+		<label for="api-key">Google Maps API Key</label>
 		<input
 			class="regular-text"
 			type="text"
@@ -29,6 +32,20 @@ $api_key = get_option("plnl-google-api-key");
 			id="api-key"
 			value="<?php echo $api_key ? $api_key : ''; ?>"
 			required>
+	</div>
+
+	<div class="form-control">
+		<label for="center-address">Center Address</label>
+		<input
+			class="regular-text"
+			type="text"
+			name="center-address"
+			id="center-address">
+	</div>
+
+	<div class="form-control">
+		<label for="center-address">Formatted Address</label>
+		<textarea class="regular-text" id="formatted-center-address" disabled><?php echo $center_address ? $center_address : ''; ?></textarea>
 	</div>
 
 	<button class="button button-primary" type="submit">Save Settings</button>

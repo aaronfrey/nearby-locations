@@ -171,6 +171,7 @@ class Pepperlillie_Nearby_Locations_Admin {
   }
 
   private function save_settings() {
+
   	$option = get_option('plnl-google-api-key');
   	$api_key = $_POST['api-key'];
 
@@ -178,6 +179,17 @@ class Pepperlillie_Nearby_Locations_Admin {
   		add_option('plnl-google-api-key', $api_key);
   	} else {
   		update_option('plnl-google-api-key', $api_key);
+  	}
+
+  	$option = get_option('plnl-center-address');
+  	$center_address = $_POST['center-address'];
+
+  	if (!$center_address) {
+			delete_option('plnl-center-address');
+  	} else if (!$option) {
+  		add_option('plnl-center-address', $center_address);
+  	} else {
+  		update_option('plnl-center-address', $center_address);
   	}
   }
 

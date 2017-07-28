@@ -42,3 +42,4 @@ $wpdb->query("DROP TABLE IF EXISTS $table_name");
 
 // Delete Options
 delete_option("plnl-google-api-key");
+delete_option("plnl-center-address");

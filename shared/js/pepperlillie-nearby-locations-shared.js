@@ -155,27 +155,48 @@
 
             e.preventDefault();
 
-            // preparing data for form posting
-            var data = {
-                'action': 'nearby_locations_crud',
-                'callback': 'save_settings',
-                'api-key': $('#api-key').val(),
-            };
+            // get the center location
+            var centerAddress = $('#center-address').val();
 
-            // save the location type to the database
-            $.ajax({
-                url: myVars.ajaxUrl,
-                type: 'post',
-                data: data,
-                cache: false,
-                success: function(response) {
-                    $('#message').html('Settings saved.');
-                },
-                error: function(response) {
-                    $('#message').html('Try again. Settings were not saved.');
-                }
-            });
+            if (centerAddress) {
+                // format the address for saving
+                geocoder.geocode({ 'address': centerAddress }, function(results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        centerAddress = results[0].formatted_address;
+                        submitForm();
+                    } else {
+                        $('#message').html('Try again. Geocode was not successful for the following reason: ' + status);
+                    }
+                });
+            } else {
+                submitForm();
+            }
 
+            function submitForm() {
+                // preparing data for form posting
+                var data = {
+                    'action': 'nearby_locations_crud',
+                    'callback': 'save_settings',
+                    'api-key': $('#api-key').val(),
+                    'center-address': centerAddress,
+                };
+
+                // save the location type to the database
+                $.ajax({
+                    url: myVars.ajaxUrl,
+                    type: 'post',
+                    data: data,
+                    cache: false,
+                    success: function(response) {
+                        console.log(response);
+                        $('#message').html('Settings saved.');
+                        $('#formatted-center-address').val(centerAddress);
+                    },
+                    error: function(response) {
+                        $('#message').html('Try again. Settings were not saved.');
+                    }
+                });
+            }
         });
 
         $('form#location-type-form').submit(function(e) {
