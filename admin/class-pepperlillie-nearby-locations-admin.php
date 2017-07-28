@@ -119,6 +119,8 @@ class Pepperlillie_Nearby_Locations_Admin {
 				$this->get_locations();
 			} elseif($_POST['callback'] === 'add_new_type') {
 				$this->add_new_type();
+			} elseif($_POST['callback'] === 'save_settings') {
+				$this->save_settings();
 			}
 		}
 
@@ -161,6 +163,17 @@ class Pepperlillie_Nearby_Locations_Admin {
 		", OBJECT);
 
 		echo json_encode($locations);
+  }
+
+  private function save_settings() {
+  	$option = get_option('plnl-google-api-key');
+  	$api_key = $_POST['api-key'];
+
+  	if (!$option) {
+  		add_option('plnl-google-api-key', $api_key);
+  	} else {
+  		update_option('plnl-google-api-key', $api_key);
+  	}
   }
 
 }

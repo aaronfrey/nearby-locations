@@ -128,7 +128,7 @@
         //     markers[activeMarker].setAnimation(null);
         // });
 
-        if ($('body').find('.pl-nearby-locations-container')) {
+        if ($('.pl-nearby-locations-container').length) {
 
             // set some default map details, initial center point, zoom and style
             var mapOptions = {
@@ -150,6 +150,33 @@
 
 
     $(function() {
+
+        $('form#settings-form').submit(function(e) {
+
+            e.preventDefault();
+
+            // preparing data for form posting
+            var data = {
+                'action': 'nearby_locations_crud',
+                'callback': 'save_settings',
+                'api-key': $('#api-key').val(),
+            };
+
+            // save the location type to the database
+            $.ajax({
+                url: myVars.ajaxUrl,
+                type: 'post',
+                data: data,
+                cache: false,
+                success: function(response) {
+                    $('#message').html('Settings saved.');
+                },
+                error: function(response) {
+                    $('#message').html('Try again. Settings were not saved.');
+                }
+            });
+
+        });
 
         $('form#location-type-form').submit(function(e) {
 

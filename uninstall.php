@@ -39,3 +39,6 @@ $wpdb->query("DROP TABLE IF EXISTS $table_name");
 // Delete the sections table
 $table_name = $wpdb->prefix . "plnl_sections";
 $wpdb->query("DROP TABLE IF EXISTS $table_name");
+
+// Delete Options
+delete_option("plnl-google-api-key");
