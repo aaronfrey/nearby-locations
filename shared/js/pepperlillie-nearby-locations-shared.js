@@ -188,8 +188,8 @@
                     data: data,
                     cache: false,
                     success: function(response) {
-                        console.log(response);
                         $('#message').html('Settings saved.');
+                        $('#center-address').val('');
                         $('#formatted-center-address').val(centerAddress);
                     },
                     error: function(response) {
