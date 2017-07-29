@@ -19,10 +19,6 @@ $locations = $wpdb->get_results("
   ORDER BY `sections`.`order` ASC, `locations`.name
 ", OBJECT);
 
-// echo '<pre>';
-// var_dump($locations);
-// echo '</pre>';
-
 ?>
 
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->

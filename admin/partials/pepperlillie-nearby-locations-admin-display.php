@@ -54,5 +54,9 @@ $location_types = $wpdb->get_results("SELECT * FROM $table_name ORDER BY `order`
 
 <br>
 
-<?php include(plugin_dir_path(dirname(dirname(__FILE__))) . 'shared/partials/pepperlillie-nearby-locations-map-display.php'); ?>
+<?php
+include(plugin_dir_path(dirname(dirname(__FILE__))) . 'shared/partials/pepperlillie-nearby-locations-map-display.php');
+include(plugin_dir_path(__FILE__) . 'pepperlillie-nearby-locations-admin-table.php');
+?>
+
 
