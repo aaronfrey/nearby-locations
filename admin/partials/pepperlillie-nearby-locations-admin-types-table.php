@@ -6,25 +6,23 @@ if (!class_exists('WP_List_Table')) {
 
 // var_dump($_GET);
 
-class Nearby_Locations_Table extends WP_List_Table {
+class Locations_Types_Table extends WP_List_Table {
     
   function __construct() {
 
     global $status, $page;
 
     parent::__construct(array(
-      'singular'  => 'nearby_location',
-      'plural'    => 'nearby_locations',
+      'singular'  => 'location_type',
+      'plural'    => 'location_types',
       'ajax'      => false
     ));
   }
 
   function column_default($item, $column_name) {
     switch($column_name) {
-      case 'section_name':
-      case 'formatted':
-      case 'lat':
-      case 'lng':
+      case 'name':
+      case 'order':
         return $item[$column_name];
       default:
         return print_r($item,true);
@@ -34,7 +32,7 @@ class Nearby_Locations_Table extends WP_List_Table {
   function column_name($item) {      
     // Build row actions
     $actions = array(
-      //'edit'   => sprintf('<a href="?page=%s&action=%s&location=%s">Edit</a>',$_REQUEST['page'],'edit',$item['id']),
+      'edit'   => sprintf('<a href="?page=%s&action=%s&'.$this->_args['singular'].'=%s">Edit</a>',$_REQUEST['page'],'edit',$item['id']),
       'delete' => sprintf('<a href="?page=%s&action=%s&'.$this->_args['singular'].'=%s">Delete</a>',$_REQUEST['page'],'delete',$item['id']),
     );
     
@@ -55,20 +53,16 @@ class Nearby_Locations_Table extends WP_List_Table {
 
   function get_columns(){
     $columns = array(
-      'cb'            => '<input type="checkbox" />',
-      'name'          => 'Location Name',
-      'section_name'  => 'Location Type',
-      'formatted'     => 'Location Address',
-      'lng'           => 'Longitude',
-      'lat'           => 'Latitude',
+      'cb'    => '<input type="checkbox" />',
+      'name'  => 'Location Type',
+      'order' => 'Order'
     );
     return $columns;
   }
 
   function get_sortable_columns() {
     $sortable_columns = array(
-      'name'          => array('name', false),
-      'section_name'  => array('section_name', false)
+      'name' => array('name', false)
     );
     return $sortable_columns;
   }
@@ -85,16 +79,15 @@ class Nearby_Locations_Table extends WP_List_Table {
     global $wpdb;
 
     // get the location(s) to perform actions on
-    $location = $_GET[$this->_args['singular']];
-    if (!is_array($location)) {
-      $location = [$location];
-    }
-
-    $table_name = $wpdb->prefix . "plnl_locations"; 
+    $location_type = $_GET[$this->_args['singular']];
 
     // detect when a bulk action is being triggered...
     if ('delete' === $this->current_action()) {
-      $wpdb->query("DELETE FROM $table_name WHERE id IN (" . implode(",", $location) . ")");
+      if (!is_array($location_type)) {
+        $location_type = [$location_type];
+      }
+      $table_name = $wpdb->prefix . "plnl_sections"; 
+      $wpdb->query("DELETE FROM $table_name WHERE id IN (" . implode(",", $location_type) . ")");
     }
   }
 
@@ -110,19 +103,13 @@ class Nearby_Locations_Table extends WP_List_Table {
     $this->process_bulk_action();
 
     $table_name = $wpdb->prefix . "plnl_sections"; 
-    $join_table_name = $wpdb->prefix . "plnl_locations"; 
-    $data = $wpdb->get_results("
-      SELECT `locations`.*, `sections`.name `section_name`
-      FROM $table_name `sections`, $join_table_name `locations`
-      WHERE `locations`.`section_id` = `sections`.`id`
-      ORDER BY `sections`.`order` ASC, `locations`.name
-    ", "ARRAY_A");
+    $data = $wpdb->get_results("SELECT * FROM $table_name", "ARRAY_A");
 
     function usort_reorder($a,$b) {
-      $orderby = (!empty($_REQUEST['orderby'])) ? $_REQUEST['orderby'] : 'name';
+      $orderby = (!empty($_REQUEST['orderby'])) ? $_REQUEST['orderby'] : 'order';
       $order = (!empty($_REQUEST['order'])) ? $_REQUEST['order'] : 'asc';
       $result = strcmp($a[$orderby], $b[$orderby]);
-      return ($order==='asc') ? $result : -$result;
+      return ($order === 'asc') ? $result : -$result;
     }
     usort($data, 'usort_reorder');
 
@@ -142,7 +129,7 @@ class Nearby_Locations_Table extends WP_List_Table {
 function tt_render_list_page() {
     
   // Create an instance of our package class...
-  $testListTable = new Nearby_Locations_Table();
+  $testListTable = new Locations_Types_Table();
   // Fetch, prepare, sort, and filter our data...
   $testListTable->prepare_items();
   
@@ -151,9 +138,9 @@ function tt_render_list_page() {
   <div class="wrap">
 
     <div id="icon-users" class="icon32"><br/></div>
-    <h2>Nearby Locations</h2>
+    <h2>Location Types</h2>
     
-    <form id="movies-filter" method="get">
+    <form method="get">
       <!-- For plugins, we also need to ensure that the form posts back to our current page -->
       <input type="hidden" name="page" value="<?php echo $_REQUEST['page']; ?>" />
       <!-- Now we can render the completed list table -->

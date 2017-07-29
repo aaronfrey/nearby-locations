@@ -11,6 +11,27 @@
  * @package    Pepperlillie_Nearby_Locations
  * @subpackage Pepperlillie_Nearby_Locations/admin/partials
  */
+
+global $wpdb;
+
+$btn_text = 'Add Location Type';
+
+$location_type = [
+	'id'		=> '',
+	'name' 	=> '',
+	'order'	=> ''
+];
+
+if (isset($_GET['action']) && $_GET['action'] === 'edit') {
+	// get the location type
+	$location_type_id = isset($_GET['location_type']) ? $_GET['location_type'] : '';
+	if ($location_type_id) {
+		$table_name = $wpdb->prefix . "plnl_sections"; 
+		$location_type = $wpdb->get_row("SELECT * FROM $table_name WHERE id = $location_type_id", "ARRAY_A");
+		$btn_text = 'Edit Location Type';
+	}
+}
+
 ?>
 
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
@@ -19,51 +40,22 @@
 
 <form id="location-type-form">
 
+	<input type="hidden" name="type-id" id="type-id" value="<?php echo $location_type['id']; ?>">
+
 	<div class="form-control">
 		<label for="type-name">Location Type Name</label>
-		<input class="regular-text" type="text" name="type-name" id="type-name" required>
+		<input class="regular-text" type="text" name="type-name" id="type-name" value="<?php echo $location_type['name']; ?>" required>
 	</div>
 
 	<div class="form-control">
 		<label for="type-order">Location Type Order</label>
-		<input class="regular-text" type="text" name="type-order" id="type-order" required>
+		<input class="regular-text" type="text" name="type-order" id="type-order" value="<?php echo $location_type['order']; ?>" required>
 	</div>
 
-	<button class="button button-primary" type="submit">Add Location Type</button>
+	<button class="button button-primary" type="submit"><?php echo $btn_text; ?></button>
 
 </form>
 
 <?php
 
-// Get all of the location types
-global $wpdb;
-$table_name = $wpdb->prefix . "plnl_sections"; 
-$results = $wpdb->get_results("SELECT * FROM $table_name ORDER BY `order` ASC", OBJECT);
-
-if ($results) : ?>
-	
-	<h2>Locations Types</h2>
-
-	<table>
-
-		<tr>
-	    <th>Location Type</th>
-	    <th>Order</th> 
-	    <th>Actions</th>
-	  </tr>
-
-		<?php foreach ($results as $result) : ?>
-
-		<tr>
-			<td><?php echo $result->name; ?></td>
-			<td><?php echo $result->order; ?></td>
-			<td><a href="#">Remove</a></td>
-		</tr>
-
-		<?php endforeach; ?>
-
-	</table>
-
-<?php endif; ?>
-
-
+include(plugin_dir_path(__FILE__) . 'pepperlillie-nearby-locations-admin-types-table.php');

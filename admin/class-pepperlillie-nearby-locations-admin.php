@@ -133,12 +133,25 @@ class Pepperlillie_Nearby_Locations_Admin {
 	}
 
 	private function add_new_type() {
+
     global $wpdb;
-		$table_name = $wpdb->prefix . "plnl_sections"; 
-    $wpdb->insert($table_name, array(
-      'name' => $_POST['name'],
-      'order' => $_POST['order'],
-    ));
+		$table_name = $wpdb->prefix . "plnl_sections";
+
+		if (!empty($_POST['id'])) {
+	    $wpdb->update(
+	    	$table_name,
+	    	array(
+	      	'name' => $_POST['name'],
+	      	'order' => $_POST['order'],
+	    	),
+	    	array('id' => $_POST['id'])
+	    );
+		} else {
+	    $wpdb->insert($table_name, array(
+	      'name' => $_POST['name'],
+	      'order' => $_POST['order'],
+	    ));
+		}
 	}
 
   private function add_new_location() {

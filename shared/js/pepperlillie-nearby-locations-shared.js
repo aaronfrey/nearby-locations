@@ -207,6 +207,7 @@
             var data = {
                 'action': 'nearby_locations_crud',
                 'callback': 'add_new_type',
+                'id': $('#type-id').val(),
                 'name': $('#type-name').val(),
                 'order': $('#type-order').val(),
             };
@@ -218,8 +219,23 @@
                 data: data,
                 cache: false,
                 success: function(response) {
-                    // reload the page - TEMPORARY
-                    location.reload();
+                    var queryParameters = {},
+                        queryString = location.search.substring(1),
+                        re = /([^&=]+)=([^&]*)/g,
+                        m;
+
+                    // Creates a map with the query string parameters
+                    while (m = re.exec(queryString)) {
+                        queryParameters[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
+                    }
+
+                    if (data.id !== '') {
+                        // Add new parameters or update existing ones
+                        queryParameters['action'] = '';
+                        queryParameters['location_type'] = '';
+                    }
+
+                    location.search = $.param(queryParameters); // Causes page to reload
                 },
                 error: function(response) {
                     $('#message').html('Try again. Saving location was not successful.');
