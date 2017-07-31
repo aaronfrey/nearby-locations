@@ -36,7 +36,7 @@
             cache: false,
             success: function(response) {
 
-                locations = response;
+                locations = response.locations;
 
                 // create a bounds to contain all markers on the map
                 bounds = new google.maps.LatLngBounds();
@@ -63,6 +63,10 @@
 
                     // bind click event to show the info box
                     bindInfoWindow(marker, map, infowindow, '<b>' + locations[l].name + "</b><br>" + locations[l].formatted);
+                }
+
+                if (response.center !== '') {
+
                 }
 
                 // readjust the map to fit all the markers at once
