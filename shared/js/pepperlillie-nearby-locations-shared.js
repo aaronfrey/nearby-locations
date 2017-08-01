@@ -116,15 +116,23 @@
 
   // showd the markers from the map
   var showMarkers = function() {
+    // show a sunset of markers or all markers?
     tempMarkers = sectionID ? markerGroups[sectionID] : markers;
+    // create a new bounds
     bounds = new google.maps.LatLngBounds();
 
+    // add selected markers to the contained bounds
     for (var i = 0; i < tempMarkers.length; i++) {
-      // add marker to the contained bounds
       bounds.extend(tempMarkers[i].getPosition());
       tempMarkers[i].setVisible(true);
     }
-    map.fitBounds(bounds);
+
+    // if there is a center location, add it to bounds
+    if (centerLocation) {
+      addCenterMarker();
+    } else {
+      map.fitBounds(bounds);
+    }
   }
 
   function initialize() {
