@@ -17,6 +17,8 @@ global $wpdb;
 $table_name = $wpdb->prefix . "plnl_sections"; 
 $location_types = $wpdb->get_results("SELECT * FROM $table_name ORDER BY `order` ASC", OBJECT);
 
+$api_key = get_option("plnl-google-api-key");
+
 ?>
 
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
@@ -50,7 +52,7 @@ $location_types = $wpdb->get_results("SELECT * FROM $table_name ORDER BY `order`
 	</div>
   <?php endif; ?>
 
-	<button class="button button-primary" type="submit">Add Location</button>
+	<button class="button button-primary" type="submit" <?php echo !$api_key ? 'disabled' : ''; ?>>Add Location</button>
 
 </form>
 

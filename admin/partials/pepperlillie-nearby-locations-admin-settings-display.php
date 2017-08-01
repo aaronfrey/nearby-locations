@@ -28,7 +28,8 @@ $center_address = get_option("plnl-center-address");
 			type="text"
 			name="api-key"
 			id="api-key"
-			value="<?php echo $api_key ? $api_key : ''; ?>">
+			value="<?php echo $api_key ? $api_key : ''; ?>"
+			required>
 	</div>
 
 	<?php if (!$center_address) : ?>
