@@ -32,6 +32,7 @@ $center_address = get_option("plnl-center-address");
 			required>
 	</div>
 
+	<?php if (!$center_address) : ?>
 	<div class="form-control">
 		<label for="center-address">Center Address</label>
 		<input
@@ -40,15 +41,21 @@ $center_address = get_option("plnl-center-address");
 			name="center-address"
 			id="center-address">
 	</div>
+	<?php endif; ?>
 
+	<?php if ($center_address) : ?>
 	<div class="form-control">
-		<label for="center-address">Formatted Address</label>
+		<label for="center-address">Center Address</label>
 		<textarea
 			class="regular-text"
 			id="formatted-center-address"
-			disabled><?php echo $center_address ? $center_address['address'] : ''; ?></textarea>
+			disabled><?php echo $center_address['address']; ?>
+		</textarea>
+		<br>
+		<button class="button button-primary indented" id="remove-location">Remove</button>
 	</div>
+	<?php endif; ?>
 
-	<button class="button button-primary" type="submit">Save Settings</button>
+	<button class="button button-primary indented" type="submit">Save Settings</button>
 
 </form>

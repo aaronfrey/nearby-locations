@@ -20,7 +20,7 @@
     float: left;
 }
 
-button[type='submit'] {
+button.indented {
     margin: 10px 0 0 150px !important;
 }
 

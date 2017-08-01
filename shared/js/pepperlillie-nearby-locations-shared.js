@@ -213,8 +213,8 @@
           cache: false,
           success: function(response) {
             $('#message').html('Settings saved.');
-            $('#center-address').val('');
-            $('#formatted-center-address').val(centerAddress.address);
+            // reload the page
+            location.reload();
           },
           error: function(response) {
             $('#message').html('Try again. Settings were not saved.');
