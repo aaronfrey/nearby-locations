@@ -162,11 +162,15 @@
     }
   }
 
-  // when page is ready, initialize the map.
-  google.maps.event.addDomListener(window, 'load', initialize);
-
   // functions run after page content is loaded
   $(function() {
+
+    // if google maps is loaded, initialize the map.
+    if (typeof google === 'object' && typeof google.maps === 'object') {
+      initialize();
+    } else {
+      $('#message').html('Please enter a valid Google Maps API key.');
+    }
 
     // process and submit the settings page form
     $('form#settings-form').submit(function(e) {

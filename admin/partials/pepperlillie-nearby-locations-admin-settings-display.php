@@ -28,8 +28,7 @@ $center_address = get_option("plnl-center-address");
 			type="text"
 			name="api-key"
 			id="api-key"
-			value="<?php echo $api_key ? $api_key : ''; ?>"
-			required>
+			value="<?php echo $api_key ? $api_key : ''; ?>">
 	</div>
 
 	<?php if (!$center_address) : ?>
@@ -39,7 +38,9 @@ $center_address = get_option("plnl-center-address");
 			class="regular-text"
 			type="text"
 			name="center-address"
-			id="center-address">
+			id="center-address"
+			<?php echo !$api_key ? 'disabled' : ''; ?>
+			>
 	</div>
 	<?php endif; ?>
 

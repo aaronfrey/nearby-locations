@@ -129,6 +129,8 @@ class Pepperlillie_Nearby_Locations_Admin {
 				$this->add_new_type();
 			} elseif($_POST['callback'] === 'update_settings') {
 				$this->update_settings();
+			} elseif ($_POST['callback'] === 'remove_center_location') {
+				$this->remove_center_location();
 			}
 		}
 
@@ -198,24 +200,18 @@ class Pepperlillie_Nearby_Locations_Admin {
   }
 
   private function update_settings() {
+  	
+  	update_option('plnl-google-api-key', $_POST['api-key']);
 
-  	$option = get_option('plnl-google-api-key');
-  	$api_key = $_POST['api-key'];
-
-  	if (!$option) {
-  		add_option('plnl-google-api-key', $api_key);
-  	} else {
-  		update_option('plnl-google-api-key', $api_key);
-  	}
-
-  	$option = get_option('plnl-center-address');
   	$center_address = $_POST['center-address'];
 
-  	if (!$center_address) {
-			delete_option('plnl-center-address');
-  	} else {
+  	if ($center_address) {
   		update_option('plnl-center-address', $center_address);
   	}
+  }
+
+  private function remove_center_location() {
+  	delete_option('plnl-center-address');
   }
 
 }
