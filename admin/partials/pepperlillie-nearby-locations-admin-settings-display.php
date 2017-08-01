@@ -13,8 +13,6 @@ $center_address = get_option("plnl-center-address");
 
 ?>
 
-<!-- This file should primarily consist of HTML with a little bit of PHP. -->
-
 <h1>Settings</h1>
 
 <div id="message"></div>
@@ -45,7 +43,10 @@ $center_address = get_option("plnl-center-address");
 
 	<div class="form-control">
 		<label for="center-address">Formatted Address</label>
-		<textarea class="regular-text" id="formatted-center-address" disabled><?php echo $center_address ? $center_address : ''; ?></textarea>
+		<textarea
+			class="regular-text"
+			id="formatted-center-address"
+			disabled><?php echo $center_address ? $center_address['address'] : ''; ?></textarea>
 	</div>
 
 	<button class="button button-primary" type="submit">Save Settings</button>

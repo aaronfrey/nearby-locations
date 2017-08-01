@@ -82,7 +82,10 @@ class Pepperlillie_Nearby_Locations_Admin {
 		wp_enqueue_script('jquery-ui', 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js', array('jquery'), $this->version, false);
 
 		wp_enqueue_script('shared', plugin_dir_url(dirname(__FILE__)) . 'shared/js/pepperlillie-nearby-locations-shared.js', array('jquery'), $this->version, false);
-		wp_localize_script('shared', 'myVars', array('ajaxUrl' => admin_url('admin-ajax.php')));
+		wp_localize_script('shared', 'myVars', array(
+			'ajaxUrl' => admin_url('admin-ajax.php'),
+			'pluginsUrl' => plugins_url(),
+		));
 
 		wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/pepperlillie-nearby-locations-admin.js', array('jquery'), $this->version, false);
 	}
@@ -120,12 +123,12 @@ class Pepperlillie_Nearby_Locations_Admin {
 		if (isset($_POST['callback'])) {
 			if($_POST['callback'] === 'add_new_location') {
 				$this->add_new_location();
-			} elseif($_POST['callback'] === 'get_locations') {
-				$this->get_locations();
+			} elseif($_POST['callback'] === 'read_locations') {
+				$this->read_locations();
 			} elseif($_POST['callback'] === 'add_new_type') {
 				$this->add_new_type();
-			} elseif($_POST['callback'] === 'save_settings') {
-				$this->save_settings();
+			} elseif($_POST['callback'] === 'update_settings') {
+				$this->update_settings();
 			}
 		}
 
@@ -167,7 +170,7 @@ class Pepperlillie_Nearby_Locations_Admin {
     ));
   }
 
-  private function get_locations() {
+  private function read_locations() {
 
   	$response = [
   		'locations' => '',
@@ -194,7 +197,7 @@ class Pepperlillie_Nearby_Locations_Admin {
 		echo json_encode($response);
   }
 
-  private function save_settings() {
+  private function update_settings() {
 
   	$option = get_option('plnl-google-api-key');
   	$api_key = $_POST['api-key'];
@@ -210,8 +213,6 @@ class Pepperlillie_Nearby_Locations_Admin {
 
   	if (!$center_address) {
 			delete_option('plnl-center-address');
-  	} else if (!$option) {
-  		add_option('plnl-center-address', $center_address);
   	} else {
   		update_option('plnl-center-address', $center_address);
   	}

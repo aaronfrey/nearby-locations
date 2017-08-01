@@ -4,6 +4,7 @@
 
   var activeMarker = null,
     bounds,
+    centerLocation,
     geocoder,
     infowindow,
     locations,
@@ -11,6 +12,7 @@
     markerGroups = {},
     markers = [],
     sectionID,
+    tempMarkers = [],
     toggleAll = true;
 
   // return an array key based on value
@@ -30,11 +32,12 @@
       type: 'post',
       data: {
         'action': 'nearby_locations_crud',
-        'callback': 'get_locations'
+        'callback': 'read_locations'
       },
       cache: false,
       success: function(response) {
 
+        centerLocation = response.center;
         locations = response.locations;
 
         // create a bounds to contain all markers on the map
@@ -64,11 +67,36 @@
           bindInfoWindow(marker, map, infowindow, '<b>' + locations[l].name + "</b><br>" + locations[l].formatted);
         }
 
-        // readjust the map to fit all the markers at once
-        map.fitBounds(bounds);
+        if (centerLocation) {
+          addCenterMarker();
+        } else {
+          // readjust the map to fit all the markers at once
+          map.fitBounds(bounds);
+        }
       }
     })
   };
+
+  var addCenterMarker = function() {
+
+    var icon = {
+      url: myVars.pluginsUrl + '/plugins-nearby-locations/shared/img/center-marker.svg'
+    };
+
+    // make and place map maker
+    var marker = new google.maps.Marker({
+      map: map,
+      position: new google.maps.LatLng(centerLocation.coords.lat, centerLocation.coords.lng),
+      title: centerLocation.address,
+      icon: icon,
+    });
+
+    // add marker to the contained bounds
+    bounds.extend(marker.getPosition());
+
+    // readjust the map to fit all the markers at once
+    map.fitBounds(bounds);
+  }
 
   // binds a map marker and infoWindow together on click
   var bindInfoWindow = function(marker, map, infowindow, html) {
@@ -88,13 +116,13 @@
 
   // showd the markers from the map
   var showMarkers = function() {
-    var newMarkers = sectionID ? markerGroups[sectionID] : markers,
-      bounds = new google.maps.LatLngBounds();
+    tempMarkers = sectionID ? markerGroups[sectionID] : markers;
+    bounds = new google.maps.LatLngBounds();
 
-    for (var i = 0; i < newMarkers.length; i++) {
+    for (var i = 0; i < tempMarkers.length; i++) {
       // add marker to the contained bounds
-      bounds.extend(newMarkers[i].getPosition());
-      newMarkers[i].setVisible(true);
+      bounds.extend(tempMarkers[i].getPosition());
+      tempMarkers[i].setVisible(true);
     }
     map.fitBounds(bounds);
   }
@@ -129,8 +157,10 @@
   // when page is ready, initialize the map.
   google.maps.event.addDomListener(window, 'load', initialize);
 
+  // functions run after page content is loaded
   $(function() {
 
+    // process and submit the settings page form
     $('form#settings-form').submit(function(e) {
 
       e.preventDefault();
@@ -142,21 +172,27 @@
         // format the address for saving
         geocoder.geocode({ 'address': centerAddress }, function(results, status) {
           if (status == google.maps.GeocoderStatus.OK) {
-            centerAddress = results[0].formatted_address;
-            submitForm();
+            centerAddress = {
+              'coords': {
+                'lat': results[0].geometry.location.lat(),
+                'lng': results[0].geometry.location.lng(),
+              },
+              'address': results[0].formatted_address,
+            };
+            submitSettingsForm();
           } else {
             $('#message').html('Try again. Geocode was not successful for the following reason: ' + status);
           }
         });
       } else {
-        submitForm();
+        submitSettingsForm();
       }
 
-      function submitForm() {
+      function submitSettingsForm() {
         // preparing data for form posting
         var data = {
           'action': 'nearby_locations_crud',
-          'callback': 'save_settings',
+          'callback': 'update_settings',
           'api-key': $('#api-key').val(),
           'center-address': centerAddress,
         };
@@ -170,7 +206,7 @@
           success: function(response) {
             $('#message').html('Settings saved.');
             $('#center-address').val('');
-            $('#formatted-center-address').val(centerAddress);
+            $('#formatted-center-address').val(centerAddress.address);
           },
           error: function(response) {
             $('#message').html('Try again. Settings were not saved.');
@@ -179,6 +215,7 @@
       }
     });
 
+    // process and submit the location type page form
     $('form#location-type-form').submit(function(e) {
 
       e.preventDefault();
@@ -199,6 +236,7 @@
         data: data,
         cache: false,
         success: function(response) {
+
           var queryParameters = {},
             queryString = location.search.substring(1),
             re = /([^&=]+)=([^&]*)/g,
@@ -215,13 +253,13 @@
             queryParameters['location_type'] = '';
           }
 
-          location.search = $.param(queryParameters); // Causes page to reload
+          // Causes page to reload
+          location.search = $.param(queryParameters);
         },
         error: function(response) {
           $('#message').html('Try again. Saving location was not successful.');
         }
       });
-
     });
 
     $('form#location-form').submit(function(e) {
@@ -267,13 +305,13 @@
               $('#message').html('Try again. Saving location was not successful.');
             }
           });
-
         } else {
           $('#message').html('Try again. Geocode was not successful for the following reason: ' + status);
         }
       });
     });
 
+    // show all of the markers at one time
     $('#toggle-all').on('click', function(e) {
       e.preventDefault();
       toggleAll = true;
@@ -307,6 +345,7 @@
       }
     });
 
+    // show info box when location is clicked in accordion
     $('.location-link').on('click', function(e) {
       e.preventDefault();
       var index = $(this).data('location-index');
