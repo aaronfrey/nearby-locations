@@ -5,7 +5,7 @@
 }
 
 .pl-nearby-locations-container .accordion-container {
-    width: 25%;
+    width: 30%;
     float: left;
 }
 
@@ -42,7 +42,8 @@
 }
 
 .pl-nearby-locations-container .accordion-container .ui-accordion .ui-accordion-header .ui-icon {
-    float: right;
+    position: absolute;
+    right: 10px;
     margin-top: 1px;
 }
 
@@ -64,7 +65,7 @@
 
 .pl-nearby-locations-container .map {
     height: 500px;
-    width: 75%;
+    width: 70%;
     float: left;
 }
 
