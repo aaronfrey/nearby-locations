@@ -38,6 +38,10 @@ if (isset($_GET['action']) && $_GET['action'] === 'edit') {
 
 <h1>Add Location Type</h1>
 
+<div id="message"></div>
+
+<br>
+
 <form id="location-type-form">
 
 	<input type="hidden" name="type-id" id="type-id" value="<?php echo $location_type['id']; ?>">
