@@ -53,14 +53,14 @@ $locations = $wpdb->get_results("
               <ul>
                 <li>
                   <a href="#" class="location-link" data-location-index="<?php echo $idx; ?>">
-                    <?php echo $location->name; ?>
+                    <?php echo stripslashes($location->name); ?>
                   </a>
                 </li>
 
               <?php else : ?>
                 <li>
                   <a href="#" class="location-link" data-location-index="<?php echo $idx; ?>">
-                    <?php echo $location->name; ?>
+                    <?php echo stripslashes($location->name); ?>
                   </a>
                 </li>
               <?php endif; ?>
