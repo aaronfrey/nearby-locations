@@ -25,6 +25,8 @@ $location_types = $wpdb->get_results("SELECT * FROM $table_name ORDER BY `order`
 
 <div id="message"></div>
 
+<br>
+
 <form id="location-form">
 
 	<div class="form-control">
