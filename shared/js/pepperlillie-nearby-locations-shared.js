@@ -217,7 +217,6 @@
           cache: false,
           success: function(response) {
             $('#message').html('Settings saved.');
-            // reload the page
             location.reload();
           },
           error: function(response) {
@@ -276,16 +275,9 @@
 
     $('#location-form').validate({
       rules: {
-        // simple rule, converted to {required:true}
-        name: {
-          required: true,
-        },
-        address: {
-          required: true,
-        },
-        type: {
-          required: true,
-        }
+        name: 'required',
+        address: 'required',
+        type: 'required'
       }
     });
 
@@ -302,36 +294,22 @@
       geocoder.geocode({ 'address': $('#address').val() }, function(results, status) {
 
         if (status == google.maps.GeocoderStatus.OK) {
-          // reposition map to the first returned location
-          map.setCenter(results[0].geometry.location);
-
-          // put marker on map
-          var marker = new google.maps.Marker({
-            map: map,
-            position: results[0].geometry.location
-          });
-
-          bindInfoWindow(marker, map, infowindow, results[0].formatted_address);
-
-          // preparing data for form posting
-          var data = {
-            'action': 'nearby_locations_crud',
-            'callback': 'add_new_location',
-            'section_id': $('#type option:selected').val(),
-            'lat': results[0].geometry.location.lat(),
-            'lng': results[0].geometry.location.lng(),
-            'location_name': $('#name').val(),
-            'formatted_name': results[0].formatted_address
-          };
 
           // save the location to the database
           $.ajax({
             url: myVars.ajaxUrl,
             type: 'post',
-            data: data,
+            data: {
+              'action': 'nearby_locations_crud',
+              'callback': 'add_new_location',
+              'section_id': $('#type option:selected').val(),
+              'lat': results[0].geometry.location.lat(),
+              'lng': results[0].geometry.location.lng(),
+              'location_name': $('#name').val(),
+              'formatted_name': results[0].formatted_address,
+            },
             cache: false,
             success: function(response) {
-              // reload the page
               location.reload();
             },
             error: function(response) {
