@@ -52,7 +52,7 @@ $api_key = get_option("plnl-google-api-key");
 	</div>
   <?php endif; ?>
 
-	<button class="button button-primary" type="submit" <?php echo !$api_key ? 'disabled' : ''; ?>>Add Location</button>
+	<button class="button button-primary" type="button" <?php echo !$api_key ? 'disabled' : ''; ?>>Add Location</button>
 
 </form>
 

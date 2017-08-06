@@ -274,7 +274,28 @@
       });
     });
 
-    $('form#location-form').submit(function(e) {
+    $('#location-form').validate({
+      rules: {
+        // simple rule, converted to {required:true}
+        name: {
+          required: true,
+        },
+        address: {
+          required: true,
+        },
+        type: {
+          required: true,
+        }
+      }
+    });
+
+    $('#location-form button').on('click', function() {
+      if ($('#location-form').valid()) {
+        $('#location-form').submit();
+      }
+    });
+
+    $('#location-form').submit(function(e) {
 
       e.preventDefault();
 
