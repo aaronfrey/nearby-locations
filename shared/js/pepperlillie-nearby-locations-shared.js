@@ -40,6 +40,7 @@
         centerLocation = response.center;
         locations = response.locations;
 
+        // clear markerGroups for a fresh map
         markerGroups = {};
 
         // create a bounds to contain all markers on the map
