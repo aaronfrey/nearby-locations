@@ -40,62 +40,50 @@
         centerLocation = response.center;
         locations = response.locations;
 
+        markerGroups = {};
+
         // create a bounds to contain all markers on the map
         bounds = new google.maps.LatLngBounds();
 
         // loop through locations and add markers to map
         for (var l in locations) {
-
-          // make and place map maker
-          var marker = new google.maps.Marker({
-            map: map,
-            position: new google.maps.LatLng(locations[l].lat, locations[l].lng),
-            title: locations[l].name + "<br>" + locations[l].geo_name
-          });
-
-          if (!(locations[l].section_id in markerGroups)) {
-            markerGroups[locations[l].section_id] = [];
-          }
-
-          markerGroups[locations[l].section_id].push(marker);
-          markers.push(marker);
-
-          // add marker to the contained bounds
-          bounds.extend(marker.getPosition());
-
-          // bind click event to show the info box
-          bindInfoWindow(marker, map, infowindow, '<b>' + locations[l].name + "</b><br>" + locations[l].formatted);
+          addMarkerToScreen(locations[l].lat, locations[l].lng, '<b>' + locations[l].name + "</b><br>" + locations[l].formatted, locations[l].section_id);
         }
-
-        if (centerLocation) {
-          addCenterMarker();
-        } else {
-          // readjust the map to fit all the markers at once
-          map.fitBounds(bounds);
-        }
+        addCenterMarker();
       }
     })
   };
 
-  var addCenterMarker = function() {
-
-    var icon = {
-      url: myVars.pluginsUrl + '/plugins-nearby-locations/shared/img/center-marker.svg'
-    };
-
+  var addMarkerToScreen = function(lat, lng, title, section, icon) {
     // make and place map maker
     var marker = new google.maps.Marker({
       map: map,
-      position: new google.maps.LatLng(centerLocation.coords.lat, centerLocation.coords.lng),
-      title: centerLocation.address,
-      icon: icon,
+      position: new google.maps.LatLng(lat, lng),
+      icon: icon ? icon : '',
     });
+
+    if (section) {
+      if (!(section in markerGroups)) {
+        markerGroups[section] = [];
+      }
+      markerGroups[section].push(marker);
+    }
+
+    markers.push(marker);
 
     // add marker to the contained bounds
     bounds.extend(marker.getPosition());
 
-    // readjust the map to fit all the markers at once
-    map.fitBounds(bounds);
+    // bind click event to show the info box
+    bindInfoWindow(marker, map, infowindow, title);
+  }
+
+  var addCenterMarker = function() {
+    if (centerLocation) {
+      addMarkerToScreen(centerLocation.coords.lat, centerLocation.coords.lng, '<b>' + centerLocation.address + '</b>', null, {
+        url: myVars.pluginsUrl + '/plugins-nearby-locations/shared/img/center-marker.svg'
+      });
+    }
   }
 
   // binds a map marker and infoWindow together on click
@@ -127,12 +115,9 @@
       tempMarkers[i].setVisible(true);
     }
 
-    // if there is a center location, add it to bounds
-    if (centerLocation) {
-      addCenterMarker();
-    } else {
-      map.fitBounds(bounds);
-    }
+    addCenterMarker();
+
+    map.fitBounds(bounds);
   }
 
   function initialize() {
