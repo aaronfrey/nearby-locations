@@ -99,7 +99,7 @@ class Pepperlillie_Nearby_Locations_Public {
 	    include('partials/pepperlillie-nearby-locations-public-display.php');
 	    return ob_get_clean();
     }
-    add_shortcode('pepperlillie_nearby_locations', 'pepperlillie_nearby_locations_shortcode');
+    add_shortcode('nearby_locations', 'pepperlillie_nearby_locations_shortcode');
 	}
 
 }

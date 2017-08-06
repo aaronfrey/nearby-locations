@@ -14,7 +14,6 @@
  *
  * @wordpress-plugin
  * Plugin Name:       Nearby Locations
- * Plugin URI:        http://www.aaronjfrey.com/
  * Description:       Add locations, grouped by categories, to a Google map.
  * Version:           1.0.0
  * Author:            Aaron Frey
