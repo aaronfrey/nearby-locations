@@ -8,25 +8,25 @@
  * registers the activation and deactivation functions, and defines a function
  * that starts the plugin.
  *
- * @link              http://www.pepperlillie.com/
+ * @link              http://www.aaronjfrey.com/
  * @since             1.0.0
  * @package           Pepperlillie_Nearby_Locations
  *
  * @wordpress-plugin
  * Plugin Name:       Nearby Locations
- * Plugin URI:        http://www.pepperlillie.com/
+ * Plugin URI:        http://www.aaronjfrey.com/
  * Description:       Add locations, grouped by categories, to a Google map.
  * Version:           1.0.0
  * Author:            Aaron Frey
- * Author URI:        http://www.pepperlillie.com/
+ * Author URI:        http://www.aaronjfrey.com/
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
- * Text Domain:       pepperlillie-nearby-locations
+ * Text Domain:       nearby-locations
  * Domain Path:       /languages
  */
 
 // If this file is called directly, abort.
-if ( ! defined( 'WPINC' ) ) {
+if (!defined('WPINC')) {
 	die;
 }
 
