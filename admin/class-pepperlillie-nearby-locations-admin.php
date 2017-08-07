@@ -121,54 +121,66 @@ class Pepperlillie_Nearby_Locations_Admin {
 
 	public function pepperlillie_nearby_locations_process_ajax() {
 
-		if (isset($_POST['callback'])) {
-			if($_POST['callback'] === 'add_new_location') {
+		$callback = sanitize_text_field($_POST['callback']);
+
+		if (isset($callback)) {
+			if($callback === 'add_new_location') {
 				$this->add_new_location();
-			} elseif($_POST['callback'] === 'read_locations') {
+			} elseif($callback === 'read_locations') {
 				$this->read_locations();
-			} elseif($_POST['callback'] === 'add_new_type') {
+			} elseif($callback === 'add_new_type') {
 				$this->add_new_type();
-			} elseif($_POST['callback'] === 'update_settings') {
+			} elseif($callback === 'update_settings') {
 				$this->update_settings();
-			} elseif ($_POST['callback'] === 'remove_center_location') {
+			} elseif ($callback === 'remove_center_location') {
 				$this->remove_center_location();
 			}
 		}
-
 		die();
 	}
 
 	private function add_new_type() {
 
+		$section_id = absint($_POST['section_id']);
+		$section_name = sanitize_text_field($_POST['name']);
+		$section_order = absint($_POST['order']);
+
     global $wpdb;
 		$table_name = $wpdb->prefix . "plnl_sections";
 
-		if (!empty($_POST['id'])) {
+		if (!empty($section_id)) {
 	    $wpdb->update(
 	    	$table_name,
 	    	array(
-	      	'name' => $_POST['name'],
-	      	'order' => $_POST['order'],
+	      	'name' => $section_name,
+	      	'order' => $section_order,
 	    	),
-	    	array('id' => $_POST['id'])
+	    	array('id' => $section_id)
 	    );
 		} else {
 	    $wpdb->insert($table_name, array(
-	      'name' => $_POST['name'],
-	      'order' => $_POST['order'],
+	      'name' => $section_name,
+	      'order' => $section_order,
 	    ));
 		}
 	}
 
   private function add_new_location() {
+
+  	$location_name = sanitize_text_field($_POST['location_name']);
+  	$formatted_name = sanitize_text_field($_POST['formatted_name']);
+  	$lat = floatval($_POST['lat']);
+  	$lng = floatval($_POST['lng']);
+  	$section_id = absint($_POST['section_id']);
+
     global $wpdb;
 		$table_name = $wpdb->prefix . "plnl_locations"; 
     $wpdb->insert($table_name, array(
-    	'section_id' => $_POST['section_id'],
-      'name' => $_POST['location_name'],
-      'formatted' => $_POST['formatted_name'],
-      'lat' => $_POST['lat'],
-      'lng' => $_POST['lng'],
+    	'section_id' => $section_id,
+      'name' => $location_name,
+      'formatted' => $formatted_name,
+      'lat' => $lat,
+      'lng' => $lng,
       'post_date' => date('Y-m-d H:i:s'),
     ));
   }
@@ -202,9 +214,10 @@ class Pepperlillie_Nearby_Locations_Admin {
 
   private function update_settings() {
   	
-  	update_option('plnl-google-api-key', $_POST['api-key']);
+  	$api_key = sanitize_text_field($_POST['api-key']);
+  	update_option('plnl-google-api-key', $api_key);
 
-  	$center_address = $_POST['center-address'];
+  	$center_address = sanitize_text_field($_POST['center-address']);
 
   	if ($center_address) {
   		update_option('plnl-center-address', $center_address);
