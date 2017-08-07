@@ -74,6 +74,7 @@
 
     // add marker to the contained bounds
     bounds.extend(marker.getPosition());
+    map.fitBounds(bounds);
 
     // bind click event to show the info box
     bindInfoWindow(marker, map, infowindow, title);
@@ -158,8 +159,26 @@
       $('#message').html('Please enter a valid Google Maps API key.');
     }
 
+    // validate the location form
+    $('.submit-button').on('click', function() {
+      // get the form
+      var form = $(this).parents('form');
+
+      if (form && $(form).valid()) {
+        // if form is valid, submit it
+        $(form).submit();
+      }
+    });
+
+    // add settimgs for validation rules
+    $('#settings-form').validate({
+      rules: {
+        'api-key': 'required',
+      }
+    });
+
     // process and submit the settings page form
-    $('form#settings-form').submit(function(e) {
+    $('#settings-form').submit(function(e) {
 
       e.preventDefault();
 
@@ -212,8 +231,19 @@
       }
     });
 
+    // add validation rules for locatio type form
+    $('#location-type-form').validate({
+      rules: {
+        'type-name': 'required',
+        'type-order': {
+          required: true,
+          digits: true,
+        }
+      }
+    });
+
     // process and submit the location type page form
-    $('form#location-type-form').submit(function(e) {
+    $('#location-type-form').submit(function(e) {
 
       e.preventDefault();
 
@@ -264,12 +294,6 @@
         name: 'required',
         address: 'required',
         type: 'required'
-      }
-    });
-
-    $('#location-form button').on('click', function() {
-      if ($('#location-form').valid()) {
-        $('#location-form').submit();
       }
     });
 

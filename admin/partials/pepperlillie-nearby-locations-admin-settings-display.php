@@ -58,6 +58,6 @@ $center_address = get_option("plnl-center-address");
 	</div>
 	<?php endif; ?>
 
-	<button class="button button-primary indented" type="submit">Save Settings</button>
+	<button class="button button-primary submit-button indented" type="button">Save Settings</button>
 
 </form>

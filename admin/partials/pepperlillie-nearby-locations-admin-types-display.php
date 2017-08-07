@@ -56,7 +56,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'edit') {
 		<input class="regular-text" type="text" name="type-order" id="type-order" value="<?php echo $location_type['order']; ?>" required>
 	</div>
 
-	<button class="button button-primary indented" type="submit"><?php echo $btn_text; ?></button>
+	<button class="button button-primary submit-button indented" type="button"><?php echo $btn_text; ?></button>
 
 </form>
 

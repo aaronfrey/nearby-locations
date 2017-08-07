@@ -175,7 +175,7 @@ class Pepperlillie_Nearby_Locations_Admin {
 
     global $wpdb;
 		$table_name = $wpdb->prefix . "plnl_locations"; 
-    $wpdb->insert($table_name, array(
+    $result = $wpdb->insert($table_name, array(
     	'section_id' => $section_id,
       'name' => $location_name,
       'formatted' => $formatted_name,
@@ -183,6 +183,7 @@ class Pepperlillie_Nearby_Locations_Admin {
       'lng' => $lng,
       'post_date' => date('Y-m-d H:i:s'),
     ));
+    echo json_encode($result);
   }
 
   private function read_locations() {
