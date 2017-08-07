@@ -44,16 +44,16 @@ if (isset($_GET['action']) && $_GET['action'] === 'edit') {
 
 <form id="location-type-form">
 
-	<input type="hidden" name="type-id" id="type-id" value="<?php echo $location_type['id']; ?>">
+	<input type="hidden" name="type-id" id="type-id" value="<?php echo esc_attr($location_type['id']); ?>">
 
 	<div class="form-control">
 		<label for="type-name">Location Type Name</label>
-		<input class="regular-text" type="text" name="type-name" id="type-name" value="<?php echo $location_type['name']; ?>" required>
+		<input class="regular-text" type="text" name="type-name" id="type-name" value="<?php echo esc_attr($location_type['name']); ?>" required>
 	</div>
 
 	<div class="form-control">
 		<label for="type-order">Location Type Order</label>
-		<input class="regular-text" type="text" name="type-order" id="type-order" value="<?php echo $location_type['order']; ?>" required>
+		<input class="regular-text" type="text" name="type-order" id="type-order" value="<?php echo esc_attr($location_type['order']); ?>" required>
 	</div>
 
 	<button class="button button-primary submit-button indented" type="button"><?php echo $btn_text; ?></button>

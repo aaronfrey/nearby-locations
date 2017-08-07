@@ -23,9 +23,9 @@ class Locations_Types_Table extends WP_List_Table {
     switch($column_name) {
       case 'name':
       case 'order':
-        return $item[$column_name];
+        return esc_html($item[$column_name]);
       default:
-        return print_r($item,true);
+        return print_r(esc_html($item), true);
     }
   }
 
@@ -142,7 +142,7 @@ function tt_render_list_page() {
     
     <form method="get">
       <!-- For plugins, we also need to ensure that the form posts back to our current page -->
-      <input type="hidden" name="page" value="<?php echo $_REQUEST['page']; ?>" />
+      <input type="hidden" name="page" value="<?php echo esc_attr($_REQUEST['page']); ?>" />
       <!-- Now we can render the completed list table -->
       <?php $testListTable->display(); ?>
     </form>

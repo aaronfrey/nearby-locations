@@ -28,7 +28,7 @@ $center_address = get_option("plnl-center-address");
 			type="text"
 			name="api-key"
 			id="api-key"
-			value="<?php echo $api_key ? $api_key : ''; ?>"
+			value="<?php echo $api_key ? esc_attr($api_key) : ''; ?>"
 			required>
 	</div>
 
@@ -51,7 +51,7 @@ $center_address = get_option("plnl-center-address");
 		<textarea
 			class="regular-text"
 			id="formatted-center-address"
-			disabled><?php echo $center_address['address']; ?>
+			disabled><?php echo esc_textarea($center_address['address']); ?>
 		</textarea>
 		<br>
 		<button class="button button-primary indented" id="remove-location">Remove</button>

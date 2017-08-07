@@ -104,9 +104,7 @@ class Pepperlillie_Nearby_Locations_Loader {
 			'priority'      => $priority,
 			'accepted_args' => $accepted_args
 		);
-
 		return $hooks;
-
 	}
 
 	/**
@@ -123,7 +121,5 @@ class Pepperlillie_Nearby_Locations_Loader {
 		foreach ( $this->actions as $hook ) {
 			add_action( $hook['hook'], array( $hook['component'], $hook['callback'] ), $hook['priority'], $hook['accepted_args'] );
 		}
-
 	}
-
 }

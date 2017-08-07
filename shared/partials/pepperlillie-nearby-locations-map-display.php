@@ -46,21 +46,21 @@ $locations = $wpdb->get_results("
               </ul></div>
             <?php endif; ?>
 
-            <h3 data-section-id="<?php echo $location->section_id; ?>">
-              <?php echo $location->section_name; ?>
+            <h3 data-section-id="<?php echo esc_attr($location->section_id); ?>">
+              <?php echo esc_html(stripslashes($location->section_name)); ?>
             </h3>
             <div>
               <ul>
                 <li>
-                  <a href="#" class="location-link" data-location-index="<?php echo $idx; ?>">
-                    <?php echo stripslashes($location->name); ?>
+                  <a href="#" class="location-link" data-location-index="<?php echo esc_attr($idx); ?>">
+                    <?php echo esc_html(stripslashes($location->name)); ?>
                   </a>
                 </li>
 
               <?php else : ?>
                 <li>
-                  <a href="#" class="location-link" data-location-index="<?php echo $idx; ?>">
-                    <?php echo stripslashes($location->name); ?>
+                  <a href="#" class="location-link" data-location-index="<?php echo esc_attr($idx); ?>">
+                    <?php echo esc_html(stripslashes($location->name)); ?>
                   </a>
                 </li>
               <?php endif; ?>

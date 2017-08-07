@@ -28,7 +28,7 @@
           $('#message').html('Try again. Center Location was not removed.');
         }
       });
-
     });
+    
   });
 })(jQuery);

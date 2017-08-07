@@ -26,7 +26,6 @@
  */
 class Pepperlillie_Nearby_Locations_i18n {
 
-
 	/**
 	 * Load the plugin text domain for translation.
 	 *
@@ -37,11 +36,7 @@ class Pepperlillie_Nearby_Locations_i18n {
 		load_plugin_textdomain(
 			'pepperlillie-nearby-locations',
 			false,
-			dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/'
+			dirname(dirname(plugin_basename(__FILE__))) . '/languages/'
 		);
-
 	}
-
-
-
 }

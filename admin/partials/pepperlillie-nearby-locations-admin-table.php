@@ -25,16 +25,15 @@ class Nearby_Locations_Table extends WP_List_Table {
       case 'formatted':
       case 'lat':
       case 'lng':
-        return $item[$column_name];
+        return esc_html($item[$column_name]);
       default:
-        return print_r($item,true);
+        return print_r(esc_html($item), true);
     }
   }
 
   function column_name($item) {      
     // Build row actions
     $actions = array(
-      //'edit'   => sprintf('<a href="?page=%s&action=%s&location=%s">Edit</a>',$_REQUEST['page'],'edit',$item['id']),
       'delete' => sprintf('<a href="?page=%s&action=%s&'.$this->_args['singular'].'=%s">Delete</a>',$_REQUEST['page'],'delete',$item['id']),
     );
     
@@ -150,12 +149,11 @@ function tt_render_list_page() {
 
   <div class="wrap">
 
-    <div id="icon-users" class="icon32"><br/></div>
     <h2>Nearby Locations</h2>
     
-    <form id="movies-filter" method="get">
+    <form method="get">
       <!-- For plugins, we also need to ensure that the form posts back to our current page -->
-      <input type="hidden" name="page" value="<?php echo $_REQUEST['page']; ?>" />
+      <input type="hidden" name="page" value="<?php echo esc_attr($_REQUEST['page']); ?>" />
       <!-- Now we can render the completed list table -->
       <?php $testListTable->display(); ?>
     </form>
