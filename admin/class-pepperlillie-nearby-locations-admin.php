@@ -140,7 +140,7 @@ class Pepperlillie_Nearby_Locations_Admin {
 	private function add_new_type() {
 
 		$section_id = absint($_POST['section_id']);
-		$section_name = sanitize_text_field($_POST['name']);
+		$section_name = sanitize_text_field(stripslashes($_POST['name']));
 		$section_order = absint($_POST['order']);
 
     global $wpdb;
@@ -175,7 +175,7 @@ class Pepperlillie_Nearby_Locations_Admin {
 		$table_name = $wpdb->prefix . "plnl_locations"; 
     $result = $wpdb->insert($table_name, array(
     	'section_id' => $section_id,
-      'name' => $location_name,
+      'name' => stripslashes($location_name),
       'formatted' => $formatted_name,
       'lat' => $lat,
       'lng' => $lng,
