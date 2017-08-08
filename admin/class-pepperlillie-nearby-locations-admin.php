@@ -216,9 +216,16 @@ class Pepperlillie_Nearby_Locations_Admin {
   	$api_key = sanitize_text_field($_POST['api-key']);
   	update_option('plnl-google-api-key', $api_key);
 
-  	$center_address = sanitize_text_field($_POST['center-address']);
+  	$center_address = $_POST['center-address'];
 
   	if ($center_address) {
+	   	$center_address = [
+	  		'coords' => [
+	  			'lat' => floatval($center_address['coords']['lat']),
+	  			'lng' => floatval($center_address['coords']['lng']),
+	  		],
+	  		'address' => sanitize_text_field($center_address['address']),
+	  	];
   		update_option('plnl-center-address', $center_address);
   	}
   }
