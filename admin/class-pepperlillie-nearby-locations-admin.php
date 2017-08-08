@@ -196,11 +196,12 @@ class Pepperlillie_Nearby_Locations_Admin {
 		$location_types = $wpdb->get_results("SELECT * FROM $table_name ORDER BY `order` ASC", OBJECT);
 
 		$join_table_name = $wpdb->prefix . "plnl_locations";
+
 		$response['locations'] = $wpdb->get_results("
-		  SELECT `locations`.*, `sections`.name `section_name`
-		  FROM $table_name `sections`, $join_table_name `locations`
-		  WHERE `locations`.`section_id` = `sections`.`id`
-		  ORDER BY `sections`.`order` ASC, `locations`.name
+			SELECT `locations`.*, `sections`.name `section_name`
+			FROM $join_table_name `locations`
+			LEFT JOIN $table_name `sections` ON `sections`.id = `locations`.section_id
+			ORDER BY `sections`.`order` ASC, `locations`.name
 		", OBJECT);
 
 		$center = get_option('plnl-center-address');

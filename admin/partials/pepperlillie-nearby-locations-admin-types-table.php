@@ -43,7 +43,7 @@ class Locations_Types_Table extends WP_List_Table {
     );
   }
 
-  function column_cb($item){
+  function column_cb($item) {
     return sprintf(
       '<input type="checkbox" name="%1$s[]" value="%2$s" />',
       /*$1%s*/ $this->_args['singular'],
@@ -51,7 +51,7 @@ class Locations_Types_Table extends WP_List_Table {
     );
   }
 
-  function get_columns(){
+  function get_columns() {
     $columns = array(
       'cb'    => '<input type="checkbox" />',
       'name'  => 'Location Type',

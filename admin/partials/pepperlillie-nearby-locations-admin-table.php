@@ -22,6 +22,7 @@ class Nearby_Locations_Table extends WP_List_Table {
   function column_default($item, $column_name) {
     switch($column_name) {
       case 'section_name':
+        return $item[$column_name] ? $item[$column_name] : 'Undefined';
       case 'formatted':
       case 'lat':
       case 'lng':
@@ -110,10 +111,11 @@ class Nearby_Locations_Table extends WP_List_Table {
 
     $table_name = $wpdb->prefix . "plnl_sections"; 
     $join_table_name = $wpdb->prefix . "plnl_locations"; 
+
     $data = $wpdb->get_results("
       SELECT `locations`.*, `sections`.name `section_name`
-      FROM $table_name `sections`, $join_table_name `locations`
-      WHERE `locations`.`section_id` = `sections`.`id`
+      FROM $join_table_name `locations`
+      LEFT JOIN $table_name `sections` ON `sections`.id = `locations`.section_id
       ORDER BY `sections`.`order` ASC, `locations`.name
     ", "ARRAY_A");
 
