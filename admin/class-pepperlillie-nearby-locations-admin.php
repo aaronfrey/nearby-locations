@@ -169,7 +169,7 @@ class Pepperlillie_Nearby_Locations_Admin {
   	$formatted_name = sanitize_text_field($_POST['formatted_name']);
   	$lat = floatval($_POST['lat']);
   	$lng = floatval($_POST['lng']);
-  	$section_id = absint($_POST['section_id']);
+  	$section_id = intval($_POST['section_id']);
 
     global $wpdb;
 		$table_name = $wpdb->prefix . "plnl_locations"; 
