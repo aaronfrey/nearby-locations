@@ -62,7 +62,7 @@
 }
 
 .pl-nearby-locations-container .accordion-container .ui-accordion .ui-accordion-content ul li a {
-    padding: 0.25em 0;
+    padding: 0.25em 15px 0.25em 0;
 }
 
 .pl-nearby-locations-container .map {
