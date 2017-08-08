@@ -195,7 +195,7 @@ class Pepperlillie_Nearby_Locations_Admin {
 		$table_name = $wpdb->prefix . "plnl_sections"; 
 		$location_types = $wpdb->get_results("SELECT * FROM $table_name ORDER BY `order` ASC", OBJECT);
 
-		$join_table_name = $wpdb->prefix . "plnl_locations"; 
+		$join_table_name = $wpdb->prefix . "plnl_locations";
 		$response['locations'] = $wpdb->get_results("
 		  SELECT `locations`.*, `sections`.name `section_name`
 		  FROM $table_name `sections`, $join_table_name `locations`

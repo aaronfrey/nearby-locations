@@ -83,11 +83,21 @@ class Locations_Types_Table extends WP_List_Table {
 
     // detect when a bulk action is being triggered...
     if ('delete' === $this->current_action()) {
+
+      // make sections an array, if it is not already
       if (!is_array($location_type)) {
         $location_type = [$location_type];
       }
-      $table_name = $wpdb->prefix . "plnl_sections"; 
-      $wpdb->query("DELETE FROM $table_name WHERE id IN (" . implode(",", $location_type) . ")");
+
+      $location_type_ids = implode(",", $location_type);
+
+      // remove the sections from the database
+      $table_name = $wpdb->prefix . "plnl_sections";
+      $wpdb->query("DELETE FROM $table_name WHERE id IN (" . $location_type_ids . ")");
+
+      // update the location that had this section type
+      $table_name = $wpdb->prefix . "plnl_locations";
+      $wpdb->query("UPDATE $table_name SET section_id = '-99' WHERE section_id IN (" . $location_type_ids . ")");
     }
   }
 

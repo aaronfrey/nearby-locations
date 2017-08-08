@@ -41,16 +41,15 @@ $api_key = get_option("plnl-google-api-key");
 		<input class="regular-text" type="text" name="address" id="address" required>
 	</div>
 
-  <?php if ($location_types) : ?>
 	<div class="form-control">
 		<label for="type">Location Type</label>
 		<select name="type" id="type" required>
+			<option value="-99">Undefined</option>
       <?php foreach ($location_types as $type) : ?>
 			<option value="<?php echo $type->id; ?>"><?php echo esc_html($type->name); ?></option>
       <?php endforeach; ?>
 		</select>
 	</div>
-  <?php endif; ?>
 
 	<button class="button button-primary submit-button" type="button" <?php echo !$api_key ? 'disabled' : ''; ?>>Add Location</button>
 
