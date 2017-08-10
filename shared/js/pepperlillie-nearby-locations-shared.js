@@ -251,7 +251,7 @@
       var data = {
         'action': 'nearby_locations_crud',
         'callback': 'add_new_type',
-        'id': $('#type-id').val(),
+        'section_id': $('#type-id').val(),
         'name': $('#type-name').val(),
         'order': $('#type-order').val(),
       };

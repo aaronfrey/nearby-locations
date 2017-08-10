@@ -44,7 +44,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'edit') {
 
 <form id="location-type-form">
 
-	<input type="hidden" name="type-id" id="type-id" value="<?php echo esc_attr($location_type['id']); ?>">
+	<input type="hidden" name="type-id" id="type-id" value="<?php echo esc_attr($location_type_id); ?>">
 
 	<div class="form-control">
 		<label for="type-name">Location Type Name</label>
