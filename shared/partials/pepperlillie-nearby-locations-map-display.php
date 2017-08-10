@@ -19,6 +19,10 @@ $locations = $wpdb->get_results("
   ORDER BY `sections`.`order` ASC, `locations`.name
 ", OBJECT);
 
+echo '<pre>';
+//var_dump($locations);
+echo '</pre>';
+
 ?>
 
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
@@ -35,57 +39,48 @@ $locations = $wpdb->get_results("
 
         <?php
 
-        $current_location_type = '';
-        $first = true;
+        $current_location_type = null;
 
         foreach ($locations as $idx => $location) :
 
-          if ($location->section_id != "-99") :
+          if ($location->section_id !== "-99") :
 
             if ($location->section_id !== $current_location_type) :
 
-              $current_location_type = $location->section_id; ?>
-
-              <!-- if this is not the first location, close all previous opened tags -->
-              <?php if ($first !== true) : $first = false; ?>
+              if ($current_location_type) : ?>
                 </ul></div>
-              <?php endif; ?>
+              <?php endif;
+
+              $current_location_type = $location->section_id; ?>
 
               <h3 data-section-id="<?php echo esc_attr($location->section_id); ?>">
                 <?php echo esc_html($location->section_name); ?>
               </h3>
               <div>
                 <ul>
-                  <li>
-                    <a href="#" class="location-link" data-location-index="<?php echo esc_attr($idx); ?>">
-                      <?php echo esc_html($location->name); ?>
-                    </a>
-                  </li>
 
-                <?php else : ?>
-                  <li>
-                    <a href="#" class="location-link" data-location-index="<?php echo esc_attr($idx); ?>">
-                      <?php echo esc_html($location->name); ?>
-                    </a>
-                  </li>
-                <?php endif; ?>
+            <?php endif; ?>
 
-            <?php endif ;?>
+            <li>
+              <a href="#" class="location-link" data-location-index="<?php echo esc_attr($idx); ?>">
+                <?php echo esc_html($location->name); ?>
+              </a>
+            </li>
+
+          <?php endif ;?>
 
         <?php endforeach; ?>
 
-        <?php if ($location->section_id != "-99") : ?>
-
-          </ul></div>
-
-        <?php endif; ?> 
+        <?php if ($current_location_type) : ?>
+        </ul></div>
+        <?php endif; ?>
 
       </div><!-- .accordion -->
 
     <?php endif; ?>
 
-  </div>
+  </div><!-- .accordion-container -->
 
   <div id="map-canvas" class="map"></div>
 
-</div>
+</div><!-- .pl-nearby-locations-container -->
