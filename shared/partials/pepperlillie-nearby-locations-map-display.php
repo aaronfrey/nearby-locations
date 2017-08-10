@@ -67,11 +67,11 @@ echo '</pre>';
               </a>
             </li>
 
-          <?php endif ;?>
+          <?php endif;
 
-        <?php endforeach; ?>
+        endforeach;
 
-        <?php if ($current_location_type) : ?>
+        if ($current_location_type) : ?>
         </ul></div>
         <?php endif; ?>
 
