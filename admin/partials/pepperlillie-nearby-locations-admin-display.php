@@ -46,7 +46,7 @@ $api_key = get_option("plnl-google-api-key");
 	<div class="form-control">
 		<label for="type">Location Type</label>
 		<select name="type" id="type" required>
-			<option value="-99">Undefined</option>
+			<option value="-99">-- None Selected --</option>
       <?php foreach ($location_types as $type) : ?>
 			<option value="<?php echo $type->id; ?>"><?php echo esc_html($type->name); ?></option>
       <?php endforeach; ?>

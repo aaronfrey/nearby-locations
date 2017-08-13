@@ -136,6 +136,7 @@
 
       // set some default map details, initial center point, zoom and style
       var mapOptions = {
+        scrollwheel: false,
         center: new google.maps.LatLng(39.9523789, -75.1657883),
         zoom: 12,
         mapTypeId: google.maps.MapTypeId.ROADMAP

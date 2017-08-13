@@ -19,10 +19,6 @@ $locations = $wpdb->get_results("
   ORDER BY `sections`.`order` ASC, `locations`.name
 ", OBJECT);
 
-// echo '<pre>';
-// var_dump($locations);
-// echo '</pre>';
-
 ?>
 
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
@@ -31,51 +27,51 @@ $locations = $wpdb->get_results("
 
   <div class="accordion-container">
 
+    <a href="#" id="toggle-all" class="toggle-all">ALL</a>
+
     <?php if ($locations) : ?>
 
-      <a href="#" id="toggle-all" class="toggle-all">ALL</a>
+    <div class="accordion">
 
-      <div class="accordion">
+      <?php
 
-        <?php
+      $current_location_type = null;
 
-        $current_location_type = null;
+      foreach ($locations as $idx => $location) :
 
-        foreach ($locations as $idx => $location) :
+        if ($location->section_id !== "-99") :
 
-          if ($location->section_id !== "-99") :
+          if ($location->section_id !== $current_location_type) :
 
-            if ($location->section_id !== $current_location_type) :
+            if ($current_location_type) : ?>
+              </ul></div>
+            <?php endif;
 
-              if ($current_location_type) : ?>
-                </ul></div>
-              <?php endif;
+            $current_location_type = $location->section_id; ?>
 
-              $current_location_type = $location->section_id; ?>
+            <h3 data-section-id="<?php echo esc_attr($location->section_id); ?>">
+              <?php echo esc_html($location->section_name); ?>
+            </h3>
+            <div>
+              <ul>
 
-              <h3 data-section-id="<?php echo esc_attr($location->section_id); ?>">
-                <?php echo esc_html($location->section_name); ?>
-              </h3>
-              <div>
-                <ul>
+          <?php endif; ?>
 
-            <?php endif; ?>
+          <li>
+            <a href="#" class="location-link" data-location-index="<?php echo esc_attr($idx); ?>">
+              <?php echo esc_html($location->name); ?>
+            </a>
+          </li>
 
-            <li>
-              <a href="#" class="location-link" data-location-index="<?php echo esc_attr($idx); ?>">
-                <?php echo esc_html($location->name); ?>
-              </a>
-            </li>
+        <?php endif;
 
-          <?php endif;
+      endforeach;
 
-        endforeach;
+      if ($current_location_type) : ?>
+      </ul></div>
+      <?php endif; ?>
 
-        if ($current_location_type) : ?>
-        </ul></div>
-        <?php endif; ?>
-
-      </div><!-- .accordion -->
+    </div><!-- .accordion -->
 
     <?php endif; ?>
 
