@@ -29,6 +29,8 @@ $api_key = get_option("plnl-google-api-key");
 
 <br>
 
+<?php if ($api_key) : ?>
+
 <form id="location-form">
 
 	<div class="form-control">
@@ -51,7 +53,9 @@ $api_key = get_option("plnl-google-api-key");
 		</select>
 	</div>
 
-	<button class="button button-primary submit-button" type="button" <?php echo !$api_key ? 'disabled' : ''; ?>>Add Location</button>
+	<button
+		class="button button-primary submit-button indented"
+		type="button">Add Location</button>
 
 </form>
 
@@ -60,3 +64,5 @@ $api_key = get_option("plnl-google-api-key");
 <?php
 include(plugin_dir_path(dirname(dirname(__FILE__))) . 'shared/partials/pepperlillie-nearby-locations-map-display.php');
 include(plugin_dir_path(__FILE__) . 'pepperlillie-nearby-locations-admin-table.php');
+
+endif;

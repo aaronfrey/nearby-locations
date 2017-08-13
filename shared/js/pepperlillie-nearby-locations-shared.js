@@ -156,7 +156,7 @@
     if (typeof google === 'object' && typeof google.maps === 'object') {
       initialize();
     } else {
-      $('#message').html('Please enter a valid Google Maps API key.');
+      $('#message').html('Please enter a valid Google Maps API key in Settings.');
     }
 
     // validate the location form

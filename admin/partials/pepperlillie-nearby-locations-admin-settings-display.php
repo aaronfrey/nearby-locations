@@ -32,22 +32,22 @@ $center_address = get_option("plnl-center-address");
 			required>
 	</div>
 
-	<?php if (!$center_address) : ?>
+	<?php if ($api_key && !$center_address) : ?>
 	<div class="form-control">
-		<label for="center-address">Center Address</label>
+		<label for="center-address">Featured Address</label>
 		<input
 			class="regular-text"
 			type="text"
 			name="center-address"
 			id="center-address"
-			<?php echo !$api_key ? 'disabled' : ''; ?>
-			>
+			<?php echo !$api_key ? 'disabled' : ''; ?>>
 	</div>
+	<div class="indented">Enter an address that will be the focal point of the map.</div>
 	<?php endif; ?>
 
 	<?php if ($center_address) : ?>
 	<div class="form-control">
-		<label for="center-address">Center Address</label>
+		<label for="center-address">Featured Address</label>
 		<textarea
 			class="regular-text"
 			id="formatted-center-address"

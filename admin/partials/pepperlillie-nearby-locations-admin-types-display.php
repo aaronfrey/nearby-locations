@@ -32,6 +32,8 @@ if (isset($_GET['action']) && $_GET['action'] === 'edit') {
 	}
 }
 
+$api_key = get_option("plnl-google-api-key");
+
 ?>
 
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
@@ -41,6 +43,8 @@ if (isset($_GET['action']) && $_GET['action'] === 'edit') {
 <div id="message"></div>
 
 <br>
+
+<?php if ($api_key) : ?>
 
 <form id="location-type-form">
 
@@ -56,10 +60,14 @@ if (isset($_GET['action']) && $_GET['action'] === 'edit') {
 		<input class="regular-text" type="text" name="type-order" id="type-order" value="<?php echo esc_attr($location_type['order']); ?>" required>
 	</div>
 
-	<button class="button button-primary submit-button indented" type="button"><?php echo $btn_text; ?></button>
+	<button
+		class="button button-primary submit-button indented"
+		type="button"><?php echo $btn_text; ?></button>
 
 </form>
 
 <?php
 
 include(plugin_dir_path(__FILE__) . 'pepperlillie-nearby-locations-admin-types-table.php');
+
+endif;
