@@ -21,11 +21,11 @@
         data: data,
         cache: false,
         success: function(response) {
-          $('#message').html('Center Location removed.');
+          $('#ajf-nearby-locations-message').html('Center Location removed.');
           location.reload();
         },
         error: function(response) {
-          $('#message').html('Try again. Center Location was not removed.');
+          $('#ajf-nearby-locations-message').html('Try again. Center Location was not removed.');
         }
       });
     });

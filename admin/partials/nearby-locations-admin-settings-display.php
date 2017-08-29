@@ -15,7 +15,7 @@ $center_address = get_option("ajf-nl-center-address");
 
 <h1>Settings</h1>
 
-<div id="message"></div>
+<div id="ajf-nearby-locations-message"></div>
 
 <br>
 

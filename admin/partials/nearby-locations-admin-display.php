@@ -25,7 +25,7 @@ $api_key = get_option("ajf-nl-google-api-key");
 
 <h1>Add Location</h1>
 
-<div id="message"></div>
+<div id="ajf-nearby-locations-message"></div>
 
 <br>
 

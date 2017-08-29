@@ -157,7 +157,7 @@
     if (typeof google === 'object' && typeof google.maps === 'object') {
       initialize();
     } else {
-      $('#message').html('Please enter a valid Google Maps API key in Settings.');
+      $('#ajf-nearby-locations-message').html('Please enter a valid Google Maps API key in Settings.');
     }
 
     // validate the location form
@@ -199,7 +199,7 @@
             };
             submitSettingsForm();
           } else {
-            $('#message').html('Try again. Geocode was not successful for the following reason: ' + status);
+            $('#ajf-nearby-locations-message').html('Try again. Geocode was not successful for the following reason: ' + status);
           }
         });
       } else {
@@ -222,11 +222,11 @@
           data: data,
           cache: false,
           success: function(response) {
-            $('#message').html('Settings saved.');
+            $('#ajf-nearby-locations-message').html('Settings saved.');
             location.reload();
           },
           error: function(response) {
-            $('#message').html('Try again. Settings were not saved.');
+            $('#ajf-nearby-locations-message').html('Try again. Settings were not saved.');
           }
         });
       }
@@ -285,7 +285,7 @@
           location.search = $.param(queryParameters);
         },
         error: function(response) {
-          $('#message').html('Try again. Saving location was not successful.');
+          $('#ajf-nearby-locations-message').html('Try again. Saving location was not successful.');
         }
       });
     });
@@ -324,11 +324,11 @@
               location.reload();
             },
             error: function(response) {
-              $('#message').html('Try again. Saving location was not successful.');
+              $('#ajf-nearby-locations-message').html('Try again. Saving location was not successful.');
             }
           });
         } else {
-          $('#message').html('Try again. Geocode was not successful for the following reason: ' + status);
+          $('#ajf-nearby-locations-message').html('Try again. Geocode was not successful for the following reason: ' + status);
         }
       });
     });
