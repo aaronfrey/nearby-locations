@@ -17,11 +17,11 @@ if (!defined('WP_UNINSTALL_PLUGIN')) {
 global $wpdb;
 
 // Delete the locations table
-$table_name = $wpdb->prefix . "plnl_locations";
+$table_name = $wpdb->prefix . "ajf_nl_locations";
 $wpdb->query("DROP TABLE IF EXISTS $table_name");
 
 // Delete the sections table
-$table_name = $wpdb->prefix . "plnl_sections";
+$table_name = $wpdb->prefix . "ajf_nl_sections";
 $wpdb->query("DROP TABLE IF EXISTS $table_name");
 
 // Delete Options

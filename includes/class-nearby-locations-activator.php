@@ -38,7 +38,7 @@ class Pepperlillie_Nearby_Locations_Activator {
 		$charset_collate = $wpdb->get_charset_collate();
 
 		// Create the locations table
-		$table_name = $wpdb->prefix . "plnl_locations"; 
+		$table_name = $wpdb->prefix . "ajf_nl_locations"; 
 		$sql = "CREATE TABLE $table_name (
 		  `id` mediumint(9) NOT NULL AUTO_INCREMENT,
 		  `section_id` mediumint(9) NOT NULL,
@@ -53,7 +53,7 @@ class Pepperlillie_Nearby_Locations_Activator {
 		dbDelta( $sql );
 
 		// Create the sections table
-		$table_name = $wpdb->prefix . "plnl_sections"; 
+		$table_name = $wpdb->prefix . "ajf_nl_sections"; 
 
 		$sql = "CREATE TABLE $table_name (
 		  `id` mediumint(9) NOT NULL AUTO_INCREMENT,

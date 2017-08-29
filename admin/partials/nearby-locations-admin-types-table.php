@@ -92,11 +92,11 @@ class Locations_Types_Table extends WP_List_Table {
       $location_type_ids = implode(",", $location_type);
 
       // remove the sections from the database
-      $table_name = $wpdb->prefix . "plnl_sections";
+      $table_name = $wpdb->prefix . "ajf_nl_sections";
       $wpdb->query("DELETE FROM $table_name WHERE id IN (" . $location_type_ids . ")");
 
       // update the location that had this section type
-      $table_name = $wpdb->prefix . "plnl_locations";
+      $table_name = $wpdb->prefix . "ajf_nl_locations";
       $wpdb->query("UPDATE $table_name SET section_id = '-99' WHERE section_id IN (" . $location_type_ids . ")");
     }
   }
@@ -112,7 +112,7 @@ class Locations_Types_Table extends WP_List_Table {
     $this->_column_headers = array($columns, $hidden, $sortable);
     $this->process_bulk_action();
 
-    $table_name = $wpdb->prefix . "plnl_sections"; 
+    $table_name = $wpdb->prefix . "ajf_nl_sections"; 
     $data = $wpdb->get_results("SELECT * FROM $table_name", "ARRAY_A");
 
     function usort_reorder($a,$b) {

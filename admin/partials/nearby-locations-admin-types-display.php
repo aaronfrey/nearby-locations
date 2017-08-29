@@ -26,7 +26,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'edit') {
 	// get the location type
 	$location_type_id = isset($_GET['location_type']) ? $_GET['location_type'] : '';
 	if ($location_type_id) {
-		$table_name = $wpdb->prefix . "plnl_sections"; 
+		$table_name = $wpdb->prefix . "ajf_nl_sections"; 
 		$location_type = $wpdb->get_row("SELECT * FROM $table_name WHERE id = $location_type_id", "ARRAY_A");
 		$btn_text = 'Edit Location Type';
 	}

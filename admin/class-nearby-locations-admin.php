@@ -144,7 +144,7 @@ class Pepperlillie_Nearby_Locations_Admin {
 		$section_order = absint($_POST['order']);
 
     global $wpdb;
-		$table_name = $wpdb->prefix . "plnl_sections";
+		$table_name = $wpdb->prefix . "ajf_nl_sections";
 
 		if (!empty($section_id)) {
 	    $wpdb->update(
@@ -172,7 +172,7 @@ class Pepperlillie_Nearby_Locations_Admin {
   	$section_id = intval($_POST['section_id']);
 
     global $wpdb;
-		$table_name = $wpdb->prefix . "plnl_locations"; 
+		$table_name = $wpdb->prefix . "ajf_nl_locations"; 
     $result = $wpdb->insert($table_name, array(
     	'section_id' => $section_id,
       'name' => stripslashes($location_name),
@@ -192,10 +192,10 @@ class Pepperlillie_Nearby_Locations_Admin {
   	];
 
 		global $wpdb;
-		$table_name = $wpdb->prefix . "plnl_sections"; 
+		$table_name = $wpdb->prefix . "ajf_nl_sections"; 
 		$location_types = $wpdb->get_results("SELECT * FROM $table_name ORDER BY `order` ASC", OBJECT);
 
-		$join_table_name = $wpdb->prefix . "plnl_locations";
+		$join_table_name = $wpdb->prefix . "ajf_nl_locations";
 
 		$response['locations'] = $wpdb->get_results("
 			SELECT `locations`.*, `sections`.name `section_name`

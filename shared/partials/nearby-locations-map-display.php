@@ -10,8 +10,8 @@
 
 // Get all of the location types
 global $wpdb;
-$table_name = $wpdb->prefix . "plnl_sections"; 
-$join_table_name = $wpdb->prefix . "plnl_locations"; 
+$table_name = $wpdb->prefix . "ajf_nl_sections"; 
+$join_table_name = $wpdb->prefix . "ajf_nl_locations"; 
 $locations = $wpdb->get_results("
   SELECT `locations`.*, `sections`.name `section_name`
   FROM $join_table_name `locations`

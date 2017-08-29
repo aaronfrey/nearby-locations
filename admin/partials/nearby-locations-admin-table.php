@@ -90,7 +90,7 @@ class Nearby_Locations_Table extends WP_List_Table {
       $location = [$location];
     }
 
-    $table_name = $wpdb->prefix . "plnl_locations"; 
+    $table_name = $wpdb->prefix . "ajf_nl_locations"; 
 
     // detect when a bulk action is being triggered...
     if ('delete' === $this->current_action()) {
@@ -109,8 +109,8 @@ class Nearby_Locations_Table extends WP_List_Table {
     $this->_column_headers = array($columns, $hidden, $sortable);
     $this->process_bulk_action();
 
-    $table_name = $wpdb->prefix . "plnl_sections"; 
-    $join_table_name = $wpdb->prefix . "plnl_locations"; 
+    $table_name = $wpdb->prefix . "ajf_nl_sections"; 
+    $join_table_name = $wpdb->prefix . "ajf_nl_locations"; 
 
     $data = $wpdb->get_results("
       SELECT `locations`.*, `sections`.name `section_name`
