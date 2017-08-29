@@ -35,7 +35,7 @@ class Pepperlillie_Nearby_Locations {
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var      Pepperlillie_Nearby_Locations_Loader    $loader    Maintains and registers all hooks for the plugin.
+	 * @var      Nearby_Locations_Loader    $loader    Maintains and registers all hooks for the plugin.
 	 */
 	protected $loader;
 
@@ -83,10 +83,10 @@ class Pepperlillie_Nearby_Locations {
 	 *
 	 * Include the following files that make up the plugin:
 	 *
-	 * - Pepperlillie_Nearby_Locations_Loader. Orchestrates the hooks of the plugin.
-	 * - Pepperlillie_Nearby_Locations_i18n. Defines internationalization functionality.
-	 * - Pepperlillie_Nearby_Locations_Admin. Defines all hooks for the admin area.
-	 * - Pepperlillie_Nearby_Locations_Public. Defines all hooks for the public side of the site.
+	 * - Nearby_Locations_Loader. Orchestrates the hooks of the plugin.
+	 * - Nearby_Locations_i18n. Defines internationalization functionality.
+	 * - Nearby_Locations_Admin. Defines all hooks for the admin area.
+	 * - Nearby_Locations_Public. Defines all hooks for the public side of the site.
 	 *
 	 * Create an instance of the loader which will be used to register the hooks
 	 * with WordPress.
@@ -126,7 +126,7 @@ class Pepperlillie_Nearby_Locations {
 	/**
 	 * Define the locale for this plugin for internationalization.
 	 *
-	 * Uses the Pepperlillie_Nearby_Locations_i18n class in order to set the domain and to register the hook
+	 * Uses the Nearby_Locations_i18n class in order to set the domain and to register the hook
 	 * with WordPress.
 	 *
 	 * @since    1.0.0
@@ -199,7 +199,7 @@ class Pepperlillie_Nearby_Locations {
 	 * The reference to the class that orchestrates the hooks with the plugin.
 	 *
 	 * @since     1.0.0
-	 * @return    Pepperlillie_Nearby_Locations_Loader    Orchestrates the hooks of the plugin.
+	 * @return    Nearby_Locations_Loader    Orchestrates the hooks of the plugin.
 	 */
 	public function get_loader() {
 		return $this->loader;
