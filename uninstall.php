@@ -25,5 +25,5 @@ $table_name = $wpdb->prefix . "plnl_sections";
 $wpdb->query("DROP TABLE IF EXISTS $table_name");
 
 // Delete Options
-delete_option("plnl-google-api-key");
-delete_option("plnl-center-address");
+delete_option("ajf-nl-google-api-key");
+delete_option("ajf-nl-center-address");

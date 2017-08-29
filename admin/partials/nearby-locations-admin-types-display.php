@@ -32,7 +32,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'edit') {
 	}
 }
 
-$api_key = get_option("plnl-google-api-key");
+$api_key = get_option("ajf-nl-google-api-key");
 
 ?>
 

@@ -76,7 +76,7 @@ class Pepperlillie_Nearby_Locations_Public {
 	public function enqueue_scripts() {
 
 		// get Google Maps API key
-		$api_key = get_option('plnl-google-api-key');
+		$api_key = get_option('ajf-nl-google-api-key');
 		if ($api_key) {
 			wp_enqueue_script('google-maps', "https://maps.googleapis.com/maps/api/js?key=$api_key", array(), $this->version, false);
 		}

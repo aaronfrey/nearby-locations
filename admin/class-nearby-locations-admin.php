@@ -72,7 +72,7 @@ class Pepperlillie_Nearby_Locations_Admin {
 	 */
 	public function enqueue_scripts() {
 		// get Google Maps API key
-		$api_key = get_option('plnl-google-api-key');
+		$api_key = get_option('ajf-nl-google-api-key');
 		if ($api_key) {
 			wp_enqueue_script('google-maps', "https://maps.googleapis.com/maps/api/js?key=$api_key", array(), $this->version, false);
 		}
@@ -204,7 +204,7 @@ class Pepperlillie_Nearby_Locations_Admin {
 			ORDER BY `sections`.`order` ASC, `locations`.name
 		", OBJECT);
 
-		$center = get_option('plnl-center-address');
+		$center = get_option('ajf-nl-center-address');
 		if ($center) {
 			$response['center'] = $center;
 		}
@@ -215,7 +215,7 @@ class Pepperlillie_Nearby_Locations_Admin {
   private function update_settings() {
   	
   	$api_key = sanitize_text_field($_POST['api-key']);
-  	update_option('plnl-google-api-key', $api_key);
+  	update_option('ajf-nl-google-api-key', $api_key);
 
   	$center_address = $_POST['center-address'];
 
@@ -227,12 +227,12 @@ class Pepperlillie_Nearby_Locations_Admin {
 	  		],
 	  		'address' => sanitize_text_field($center_address['address']),
 	  	];
-  		update_option('plnl-center-address', $center_address);
+  		update_option('ajf-nl-center-address', $center_address);
   	}
   }
 
   private function remove_center_location() {
-  	delete_option('plnl-center-address');
+  	delete_option('ajf-nl-center-address');
   }
 
 }

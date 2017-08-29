@@ -8,8 +8,8 @@
  * @subpackage Nearby_Locations/admin/partials
  */
 
-$api_key = get_option("plnl-google-api-key");
-$center_address = get_option("plnl-center-address");
+$api_key = get_option("ajf-nl-google-api-key");
+$center_address = get_option("ajf-nl-center-address");
 
 ?>
 

@@ -17,7 +17,7 @@ global $wpdb;
 $table_name = $wpdb->prefix . "plnl_sections"; 
 $location_types = $wpdb->get_results("SELECT * FROM $table_name ORDER BY `order` ASC", OBJECT);
 
-$api_key = get_option("plnl-google-api-key");
+$api_key = get_option("ajf-nl-google-api-key");
 
 ?>
 
