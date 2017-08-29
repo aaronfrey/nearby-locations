@@ -7,7 +7,7 @@
  * @since      1.0.0
  *
  * @package    Nearby_Locations
- * @subpackage Pepperlillie_Nearby_Locations/admin
+ * @subpackage Nearby_Locations/admin
  */
 
 /**
@@ -17,7 +17,7 @@
  * enqueue the admin-specific stylesheet and JavaScript.
  *
  * @package    Nearby_Locations
- * @subpackage Pepperlillie_Nearby_Locations/admin
+ * @subpackage Nearby_Locations/admin
  * @author     Aaron Frey <aaron.frey@gmail.com>
  */
 class Pepperlillie_Nearby_Locations_Admin {
