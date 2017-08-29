@@ -34,8 +34,9 @@ class Nearby_Locations_Table extends WP_List_Table {
 
   function column_name($item) {      
     // Build row actions
+    $page = sanitize_file_name($_REQUEST['page']);
     $actions = array(
-      'delete' => sprintf('<a href="?page=%s&action=%s&'.$this->_args['singular'].'=%s">Delete</a>',$_REQUEST['page'],'delete',$item['id']),
+      'delete' => sprintf('<a href="?page=%s&action=%s&'.$this->_args['singular'].'=%s">Delete</a>', $page, 'delete', $item['id']),
     );
     
     // Return the title contents
@@ -120,8 +121,11 @@ class Nearby_Locations_Table extends WP_List_Table {
     ", "ARRAY_A");
 
     function usort_reorder($a,$b) {
-      $orderby = (!empty($_REQUEST['orderby'])) ? $_REQUEST['orderby'] : 'name';
-      $order = (!empty($_REQUEST['order'])) ? $_REQUEST['order'] : 'asc';
+      $orderby = sanitize_sql_orderby($_REQUEST['orderby']);
+      $order = sanitize_key($_REQUEST['order']);
+
+      $orderby = !empty($orderby) ? $orderby : 'name';
+      $order = !empty($order) ? $order : 'asc';
       $result = strcmp($a[$orderby], $b[$orderby]);
       return ($order==='asc') ? $result : -$result;
     }
@@ -155,7 +159,7 @@ function tt_render_list_page() {
     
     <form method="get">
       <!-- For plugins, we also need to ensure that the form posts back to our current page -->
-      <input type="hidden" name="page" value="<?php echo esc_attr($_REQUEST['page']); ?>" />
+      <input type="hidden" name="page" value="<?php echo esc_attr(sanitize_file_name($_REQUEST['page'])); ?>" />
       <!-- Now we can render the completed list table -->
       <?php $testListTable->display(); ?>
     </form>
