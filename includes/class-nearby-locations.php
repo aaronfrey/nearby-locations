@@ -1,19 +1,6 @@
 <?php
 
 /**
- * The file that defines the core plugin class
- *
- * A class definition that includes attributes and functions used across both the
- * public-facing side of the site and the admin area.
- *
- * @link       http://www.aaronjfrey.com/
- * @since      1.0.0
- *
- * @package    Nearby_Locations
- * @subpackage Nearby_Locations/includes
- */
-
-/**
  * The core plugin class.
  *
  * This is used to define internationalization, admin-specific hooks, and
@@ -214,5 +201,4 @@ class Pepperlillie_Nearby_Locations {
 	public function get_version() {
 		return $this->version;
 	}
-
 }

@@ -26,7 +26,7 @@ if (!defined('WPINC')) {
  * The code that runs during plugin activation.
  * This action is documented in includes/class-nearby-locations-activator.php
  */
-function activate_pepperlillie_nearby_locations() {
+function activate_ajf_nearby_locations() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-nearby-locations-activator.php';
 	Pepperlillie_Nearby_Locations_Activator::activate();
 }
@@ -35,13 +35,13 @@ function activate_pepperlillie_nearby_locations() {
  * The code that runs during plugin deactivation.
  * This action is documented in includes/class-nearby-locations-deactivator.php
  */
-function deactivate_pepperlillie_nearby_locations() {
+function deactivate_ajf_nearby_locations() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-nearby-locations-deactivator.php';
 	Pepperlillie_Nearby_Locations_Deactivator::deactivate();
 }
 
-register_activation_hook( __FILE__, 'activate_pepperlillie_nearby_locations' );
-register_deactivation_hook( __FILE__, 'deactivate_pepperlillie_nearby_locations' );
+register_activation_hook( __FILE__, 'activate_ajf_nearby_locations' );
+register_deactivation_hook( __FILE__, 'deactivate_ajf_nearby_locations' );
 
 /**
  * The core plugin class that is used to define internationalization,
@@ -58,10 +58,10 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-nearby-locations.php';
  *
  * @since    1.0.0
  */
-function run_pepperlillie_nearby_locations() {
+function run_ajf_nearby_locations() {
 
 	$plugin = new Pepperlillie_Nearby_Locations();
 	$plugin->run();
 
 }
-run_pepperlillie_nearby_locations();
+run_ajf_nearby_locations();

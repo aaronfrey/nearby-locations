@@ -1,16 +1,6 @@
 <?php
 
 /**
- * Fired during plugin deactivation
- *
- * @link       http://www.aaronjfrey.com/
- * @since      1.0.0
- *
- * @package    Nearby_Locations
- * @subpackage Nearby_Locations/includes
- */
-
-/**
  * Fired during plugin deactivation.
  *
  * This class defines all code necessary to run during the plugin's deactivation.
@@ -29,8 +19,5 @@ class Pepperlillie_Nearby_Locations_Deactivator {
 	 *
 	 * @since    1.0.0
 	 */
-	public static function deactivate() {
-
-	}
-
+	public static function deactivate() {}
 }

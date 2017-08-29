@@ -4,8 +4,6 @@ if (!class_exists('WP_List_Table')) {
   require_once(ABSPATH . 'wp-admin/includes/class-wp-list-table.php');
 }
 
-// var_dump($_GET);
-
 class Locations_Types_Table extends WP_List_Table {
     
   function __construct() {

@@ -4,8 +4,6 @@ if (!class_exists('WP_List_Table')) {
   require_once(ABSPATH . 'wp-admin/includes/class-wp-list-table.php');
 }
 
-// var_dump($_GET);
-
 class Nearby_Locations_Table extends WP_List_Table {
     
   function __construct() {
@@ -45,7 +43,7 @@ class Nearby_Locations_Table extends WP_List_Table {
     );
   }
 
-  function column_cb($item){
+  function column_cb($item) {
     return sprintf(
       '<input type="checkbox" name="%1$s[]" value="%2$s" />',
       /*$1%s*/ $this->_args['singular'],
@@ -53,7 +51,7 @@ class Nearby_Locations_Table extends WP_List_Table {
     );
   }
 
-  function get_columns(){
+  function get_columns() {
     $columns = array(
       'cb'            => '<input type="checkbox" />',
       'name'          => 'Location Name',

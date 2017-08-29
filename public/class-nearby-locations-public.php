@@ -3,16 +3,6 @@
 /**
  * The public-facing functionality of the plugin.
  *
- * @link       http://www.aaronjfrey.com/
- * @since      1.0.0
- *
- * @package    Nearby_Locations
- * @subpackage Nearby_Locations/public
- */
-
-/**
- * The public-facing functionality of the plugin.
- *
  * Defines the plugin name, version, and two examples hooks for how to
  * enqueue the admin-specific stylesheet and JavaScript.
  *
@@ -90,7 +80,6 @@ class Pepperlillie_Nearby_Locations_Public {
 		));
 
 		wp_enqueue_script($this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/nearby-locations-public.js', array('jquery'), $this->version, false);
-
 	}
 
 	public function pepperlillie_nearby_locations_shortcodes_init() {
@@ -101,5 +90,4 @@ class Pepperlillie_Nearby_Locations_Public {
     }
     add_shortcode('nearby_locations', 'pepperlillie_nearby_locations_shortcode');
 	}
-
 }
