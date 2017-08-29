@@ -5,7 +5,7 @@
  * @since      1.0.0
  *
  * @package    Nearby_Locations
- * @subpackage Pepperlillie_Nearby_Locations/shared/partials
+ * @subpackage Nearby_Locations/shared/partials
  */
 
 // Get all of the location types

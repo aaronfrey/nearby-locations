@@ -9,7 +9,7 @@
  * @since      1.0.0
  *
  * @package    Nearby_Locations
- * @subpackage Pepperlillie_Nearby_Locations/public/partials
+ * @subpackage Nearby_Locations/public/partials
  */
 
 include(plugin_dir_path(dirname(dirname(__FILE__))) . 'shared/partials/nearby-locations-map-display.php');
