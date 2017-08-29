@@ -8,8 +8,8 @@
  * @link       http://www.aaronjfrey.com/
  * @since      1.0.0
  *
- * @package    Pepperlillie_Nearby_Locations
- * @subpackage Pepperlillie_Nearby_Locations/admin/partials
+ * @package    Nearby_Locations
+ * @subpackage Nearby_Locations/admin/partials
  */
 
 // Get all of the location types

@@ -9,7 +9,7 @@
  * @link       http://www.aaronjfrey.com/
  * @since      1.0.0
  *
- * @package    Pepperlillie_Nearby_Locations
+ * @package    Nearby_Locations
  * @subpackage Pepperlillie_Nearby_Locations/includes
  */
 
@@ -23,7 +23,7 @@
  * version of the plugin.
  *
  * @since      1.0.0
- * @package    Pepperlillie_Nearby_Locations
+ * @package    Nearby_Locations
  * @subpackage Pepperlillie_Nearby_Locations/includes
  * @author     Aaron Frey <aaron.frey@gmail.com>
  */
