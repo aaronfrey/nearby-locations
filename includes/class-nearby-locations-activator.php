@@ -31,7 +31,7 @@ class Pepperlillie_Nearby_Locations_Activator {
 	 */
 	public static function activate() {
 
-		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+		require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 
 		global $wpdb;
 
@@ -63,7 +63,5 @@ class Pepperlillie_Nearby_Locations_Activator {
 		) $charset_collate;";
 
 		dbDelta( $sql );
-
 	}
-
 }
