@@ -7,7 +7,7 @@
  * @since      1.0.0
  *
  * @package    Nearby_Locations
- * @subpackage Pepperlillie_Nearby_Locations/includes
+ * @subpackage Nearby_Locations/includes
  */
 
 /**
@@ -18,7 +18,7 @@
  * run function to execute the list of actions and filters.
  *
  * @package    Nearby_Locations
- * @subpackage Pepperlillie_Nearby_Locations/includes
+ * @subpackage Nearby_Locations/includes
  * @author     Aaron Frey <aaron.frey@gmail.com>
  */
 class Pepperlillie_Nearby_Locations_Loader {
