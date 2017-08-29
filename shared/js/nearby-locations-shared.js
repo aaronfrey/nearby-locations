@@ -83,7 +83,7 @@
   var addCenterMarker = function() {
     if (centerLocation) {
       addMarkerToScreen(centerLocation.coords.lat, centerLocation.coords.lng, '<b>' + centerLocation.address + '</b>', null, {
-        url: myVars.pluginsUrl + '/plugins-nearby-locations/shared/img/center-marker.svg'
+        url: myVars.pluginsUrl + '/nearby-locations/shared/img/center-marker.svg'
       });
     }
   }
