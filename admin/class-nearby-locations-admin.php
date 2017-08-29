@@ -60,9 +60,9 @@ class Pepperlillie_Nearby_Locations_Admin {
 	public function enqueue_styles() {
 		wp_enqueue_style('jquery-ui', 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css', array(), $this->version, 'all');
 
-		wp_enqueue_style('shared', plugin_dir_url(dirname(__FILE__)) . 'shared/css/pepperlillie-nearby-locations-shared.css', array(), $this->version, 'all');
+		wp_enqueue_style('shared', plugin_dir_url(dirname(__FILE__)) . 'shared/css/nearby-locations-shared.css', array(), $this->version, 'all');
 
-		wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/pepperlillie-nearby-locations-admin.css', array(), $this->version, 'all');
+		wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/nearby-locations-admin.css', array(), $this->version, 'all');
 	}
 
 	/**
@@ -79,14 +79,14 @@ class Pepperlillie_Nearby_Locations_Admin {
 
 		wp_enqueue_script('jquery-ui', 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js', array('jquery'), $this->version, false);
 		wp_enqueue_script('jquery-validate', 'https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js', array('jquery'), $this->version, false);
-		wp_enqueue_script('shared', plugin_dir_url(dirname(__FILE__)) . 'shared/js/pepperlillie-nearby-locations-shared.js', array('jquery'), $this->version, false);
+		wp_enqueue_script('shared', plugin_dir_url(dirname(__FILE__)) . 'shared/js/nearby-locations-shared.js', array('jquery'), $this->version, false);
 
 		wp_localize_script('shared', 'myVars', array(
 			'ajaxUrl' => admin_url('admin-ajax.php'),
 			'pluginsUrl' => plugins_url(),
 		));
 
-		wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/pepperlillie-nearby-locations-admin.js', array('jquery'), $this->version, false);
+		wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/nearby-locations-admin.js', array('jquery'), $this->version, false);
 	}
 
 	public function pepperlillie_nearby_locations_page() {
@@ -94,25 +94,25 @@ class Pepperlillie_Nearby_Locations_Admin {
       'Nearby Locations',
       'Locations',
       'manage_options',
-      plugin_dir_path(__FILE__) . 'partials/pepperlillie-nearby-locations-admin-display.php',
+      plugin_dir_path(__FILE__) . 'partials/nearby-locations-admin-display.php',
       null,
       'dashicons-location'
     );
 
 		add_submenu_page(
-			plugin_dir_path(__FILE__) . 'partials/pepperlillie-nearby-locations-admin-display.php',
+			plugin_dir_path(__FILE__) . 'partials/nearby-locations-admin-display.php',
 			'Location Types',
 			'Location Types',
 			'manage_options',
-			plugin_dir_path(__FILE__) . 'partials/pepperlillie-nearby-locations-admin-types-display.php'
+			plugin_dir_path(__FILE__) . 'partials/nearby-locations-admin-types-display.php'
 		);
 
 		add_submenu_page(
-			plugin_dir_path(__FILE__) . 'partials/pepperlillie-nearby-locations-admin-display.php',
+			plugin_dir_path(__FILE__) . 'partials/nearby-locations-admin-display.php',
 			'Settings',
 			'Settings',
 			'manage_options',
-			plugin_dir_path(__FILE__) . 'partials/pepperlillie-nearby-locations-admin-settings-display.php'
+			plugin_dir_path(__FILE__) . 'partials/nearby-locations-admin-settings-display.php'
 		);
 
 	}	

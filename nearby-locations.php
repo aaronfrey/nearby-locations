@@ -1,13 +1,6 @@
 <?php
 
 /**
- * The plugin bootstrap file
- *
- * This file is read by WordPress to generate the plugin information in the plugin
- * admin area. This file also includes all of the dependencies used by the plugin,
- * registers the activation and deactivation functions, and defines a function
- * that starts the plugin.
- *
  * @link              http://www.aaronjfrey.com/
  * @since             1.0.0
  * @package           Pepperlillie_Nearby_Locations
@@ -31,19 +24,19 @@ if (!defined('WPINC')) {
 
 /**
  * The code that runs during plugin activation.
- * This action is documented in includes/class-pepperlillie-nearby-locations-activator.php
+ * This action is documented in includes/class-nearby-locations-activator.php
  */
 function activate_pepperlillie_nearby_locations() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-pepperlillie-nearby-locations-activator.php';
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-nearby-locations-activator.php';
 	Pepperlillie_Nearby_Locations_Activator::activate();
 }
 
 /**
  * The code that runs during plugin deactivation.
- * This action is documented in includes/class-pepperlillie-nearby-locations-deactivator.php
+ * This action is documented in includes/class-nearby-locations-deactivator.php
  */
 function deactivate_pepperlillie_nearby_locations() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-pepperlillie-nearby-locations-deactivator.php';
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-nearby-locations-deactivator.php';
 	Pepperlillie_Nearby_Locations_Deactivator::deactivate();
 }
 
@@ -54,7 +47,7 @@ register_deactivation_hook( __FILE__, 'deactivate_pepperlillie_nearby_locations'
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
  */
-require plugin_dir_path( __FILE__ ) . 'includes/class-pepperlillie-nearby-locations.php';
+require plugin_dir_path( __FILE__ ) . 'includes/class-nearby-locations.php';
 
 /**
  * Begins execution of the plugin.

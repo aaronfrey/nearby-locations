@@ -63,9 +63,9 @@ class Pepperlillie_Nearby_Locations_Public {
 
 		wp_enqueue_style('jquery-ui', 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css', array(), $this->version, 'all');
 
-		wp_enqueue_style('shared', plugin_dir_url(dirname(__FILE__)) . 'shared/css/pepperlillie-nearby-locations-shared.css', array(), $this->version, 'all');
+		wp_enqueue_style('shared', plugin_dir_url(dirname(__FILE__)) . 'shared/css/nearby-locations-shared.css', array(), $this->version, 'all');
 
-		wp_enqueue_style($this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/pepperlillie-nearby-locations-public.css', array(), $this->version, 'all');
+		wp_enqueue_style($this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/nearby-locations-public.css', array(), $this->version, 'all');
 	}
 
 	/**
@@ -83,20 +83,20 @@ class Pepperlillie_Nearby_Locations_Public {
 
 		wp_enqueue_script('jquery-ui', 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js', array('jquery'), $this->version, false);
 
-		wp_enqueue_script('shared', plugin_dir_url(dirname(__FILE__)) . 'shared/js/pepperlillie-nearby-locations-shared.js', array('jquery'), $this->version, false);
+		wp_enqueue_script('shared', plugin_dir_url(dirname(__FILE__)) . 'shared/js/nearby-locations-shared.js', array('jquery'), $this->version, false);
 		wp_localize_script('shared', 'myVars', array(
 			'ajaxUrl' => admin_url('admin-ajax.php'),
 			'pluginsUrl' => plugins_url(),
 		));
 
-		wp_enqueue_script($this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/pepperlillie-nearby-locations-public.js', array('jquery'), $this->version, false);
+		wp_enqueue_script($this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/nearby-locations-public.js', array('jquery'), $this->version, false);
 
 	}
 
 	public function pepperlillie_nearby_locations_shortcodes_init() {
     function pepperlillie_nearby_locations_shortcode($atts = [], $content = null) {
 	    ob_start();
-	    include('partials/pepperlillie-nearby-locations-public-display.php');
+	    include('partials/nearby-locations-public-display.php');
 	    return ob_get_clean();
     }
     add_shortcode('nearby_locations', 'pepperlillie_nearby_locations_shortcode');

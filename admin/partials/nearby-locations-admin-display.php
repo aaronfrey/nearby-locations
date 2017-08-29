@@ -62,7 +62,7 @@ $api_key = get_option("plnl-google-api-key");
 <br>
 
 <?php
-include(plugin_dir_path(dirname(dirname(__FILE__))) . 'shared/partials/pepperlillie-nearby-locations-map-display.php');
-include(plugin_dir_path(__FILE__) . 'pepperlillie-nearby-locations-admin-table.php');
+include(plugin_dir_path(dirname(dirname(__FILE__))) . 'shared/partials/nearby-locations-map-display.php');
+include(plugin_dir_path(__FILE__) . 'nearby-locations-admin-table.php');
 
 endif;

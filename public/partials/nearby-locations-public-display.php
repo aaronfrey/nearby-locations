@@ -12,7 +12,7 @@
  * @subpackage Pepperlillie_Nearby_Locations/public/partials
  */
 
-include(plugin_dir_path(dirname(dirname(__FILE__))) . 'shared/partials/pepperlillie-nearby-locations-map-display.php');
+include(plugin_dir_path(dirname(dirname(__FILE__))) . 'shared/partials/nearby-locations-map-display.php');
 
 ?>
 
