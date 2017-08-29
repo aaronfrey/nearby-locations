@@ -3,7 +3,7 @@
 /**
  * Fired during plugin deactivation
  *
- * @link       http://www.pepperlillie.com/
+ * @link       http://www.aaronjfrey.com/
  * @since      1.0.0
  *
  * @package    Pepperlillie_Nearby_Locations

@@ -6,7 +6,7 @@
  * Loads and defines the internationalization files for this plugin
  * so that it is ready for translation.
  *
- * @link       http://www.pepperlillie.com/
+ * @link       http://www.aaronjfrey.com/
  * @since      1.0.0
  *
  * @package    Pepperlillie_Nearby_Locations

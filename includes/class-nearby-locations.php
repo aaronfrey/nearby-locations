@@ -6,7 +6,7 @@
  * A class definition that includes attributes and functions used across both the
  * public-facing side of the site and the admin area.
  *
- * @link       http://www.pepperlillie.com/
+ * @link       http://www.aaronjfrey.com/
  * @since      1.0.0
  *
  * @package    Pepperlillie_Nearby_Locations
