@@ -21,7 +21,7 @@ class AJF_Nearby_Locations_i18n {
 	public function load_plugin_textdomain() {
 
 		load_plugin_textdomain(
-			'pepperlillie-nearby-locations',
+			'ajf-nearby-locations',
 			false,
 			dirname(dirname(plugin_basename(__FILE__))) . '/languages/'
 		);

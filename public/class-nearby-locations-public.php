@@ -82,12 +82,12 @@ class AJF_Nearby_Locations_Public {
 		wp_enqueue_script($this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/nearby-locations-public.js', array('jquery'), $this->version, false);
 	}
 
-	public function pepperlillie_nearby_locations_shortcodes_init() {
-    function pepperlillie_nearby_locations_shortcode($atts = [], $content = null) {
+	public function ajf_nearby_locations_shortcodes_init() {
+    function ajf_nearby_locations_shortcode($atts = [], $content = null) {
 	    ob_start();
 	    include('partials/nearby-locations-public-display.php');
 	    return ob_get_clean();
     }
-    add_shortcode('nearby_locations', 'pepperlillie_nearby_locations_shortcode');
+    add_shortcode('nearby_locations', 'ajf_nearby_locations_shortcode');
 	}
 }

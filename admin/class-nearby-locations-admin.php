@@ -89,7 +89,7 @@ class AJF_Nearby_Locations_Admin {
 		wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/nearby-locations-admin.js', array('jquery'), $this->version, false);
 	}
 
-	public function pepperlillie_nearby_locations_page() {
+	public function ajf_nearby_locations_page() {
     add_menu_page(
       'Nearby Locations',
       'Locations',
@@ -117,7 +117,7 @@ class AJF_Nearby_Locations_Admin {
 
 	}	
 
-	public function pepperlillie_nearby_locations_process_ajax() {
+	public function ajf_nearby_locations_process_ajax() {
 
 		$callback = sanitize_text_field($_POST['callback']);
 
