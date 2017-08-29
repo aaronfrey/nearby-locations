@@ -31,10 +31,9 @@ class Locations_Types_Table extends WP_List_Table {
 
   function column_name($item) {      
     // Build row actions
-    $page = sanitize_file_name($_REQUEST['page']);
     $actions = array(
-      'edit'   => sprintf('<a href="?page=%s&action=%s&'.$this->_args['singular'].'=%s">Edit</a>', $page, 'edit', $item['id']),
-      'delete' => sprintf('<a href="?page=%s&action=%s&'.$this->_args['singular'].'=%s">Delete</a>', $page, 'delete', $item['id']),
+      'edit'   => sprintf('<a href="?page=%s&action=%s&'.$this->_args['singular'].'=%s">Edit</a>', $_REQUEST['page'], 'edit', $item['id']),
+      'delete' => sprintf('<a href="?page=%s&action=%s&'.$this->_args['singular'].'=%s">Delete</a>', $_REQUEST['page'], 'delete', $item['id']),
     );
     
     // Return the title contents
