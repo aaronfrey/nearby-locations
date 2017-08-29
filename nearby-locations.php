@@ -28,7 +28,7 @@ if (!defined('WPINC')) {
  */
 function activate_ajf_nearby_locations() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-nearby-locations-activator.php';
-	Pepperlillie_Nearby_Locations_Activator::activate();
+	AJF_Nearby_Locations_Activator::activate();
 }
 
 /**
@@ -37,7 +37,7 @@ function activate_ajf_nearby_locations() {
  */
 function deactivate_ajf_nearby_locations() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-nearby-locations-deactivator.php';
-	Pepperlillie_Nearby_Locations_Deactivator::deactivate();
+	AJF_Nearby_Locations_Deactivator::deactivate();
 }
 
 register_activation_hook( __FILE__, 'activate_ajf_nearby_locations' );
@@ -60,7 +60,7 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-nearby-locations.php';
  */
 function run_ajf_nearby_locations() {
 
-	$plugin = new Pepperlillie_Nearby_Locations();
+	$plugin = new AJF_Nearby_Locations();
 	$plugin->run();
 
 }

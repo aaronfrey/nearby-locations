@@ -10,7 +10,7 @@
  * @subpackage Nearby_Locations/includes
  * @author     Aaron Frey <aaron.frey@gmail.com>
  */
-class Pepperlillie_Nearby_Locations_Activator {
+class AJF_Nearby_Locations_Activator {
 
 	/**
 	 * Short Description. (use period)

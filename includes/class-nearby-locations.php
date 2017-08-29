@@ -14,7 +14,7 @@
  * @subpackage Nearby_Locations/includes
  * @author     Aaron Frey <aaron.frey@gmail.com>
  */
-class Pepperlillie_Nearby_Locations {
+class AJF_Nearby_Locations {
 
 	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
@@ -106,7 +106,7 @@ class Pepperlillie_Nearby_Locations {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-nearby-locations-public.php';
 
-		$this->loader = new Pepperlillie_Nearby_Locations_Loader();
+		$this->loader = new AJF_Nearby_Locations_Loader();
 
 	}
 
@@ -121,7 +121,7 @@ class Pepperlillie_Nearby_Locations {
 	 */
 	private function set_locale() {
 
-		$plugin_i18n = new Pepperlillie_Nearby_Locations_i18n();
+		$plugin_i18n = new AJF_Nearby_Locations_i18n();
 
 		$this->loader->add_action('plugins_loaded', $plugin_i18n, 'load_plugin_textdomain');
 
@@ -136,7 +136,7 @@ class Pepperlillie_Nearby_Locations {
 	 */
 	private function define_admin_hooks() {
 
-		$plugin_admin = new Pepperlillie_Nearby_Locations_Admin( $this->get_plugin_name(), $this->get_version());
+		$plugin_admin = new AJF_Nearby_Locations_Admin( $this->get_plugin_name(), $this->get_version());
 
 		$this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_styles');
 		$this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts');
@@ -154,7 +154,7 @@ class Pepperlillie_Nearby_Locations {
 	 * @access   private
 	 */
 	private function define_public_hooks() {
-		$plugin_public = new Pepperlillie_Nearby_Locations_Public( $this->get_plugin_name(), $this->get_version() );
+		$plugin_public = new AJF_Nearby_Locations_Public( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_styles');
 		$this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_scripts');

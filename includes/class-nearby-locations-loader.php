@@ -11,7 +11,7 @@
  * @subpackage Nearby_Locations/includes
  * @author     Aaron Frey <aaron.frey@gmail.com>
  */
-class Pepperlillie_Nearby_Locations_Loader {
+class AJF_Nearby_Locations_Loader {
 
 	/**
 	 * The array of actions registered with WordPress.

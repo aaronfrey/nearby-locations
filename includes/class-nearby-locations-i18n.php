@@ -11,7 +11,7 @@
  * @subpackage Nearby_Locations/includes
  * @author     Aaron Frey <aaron.frey@gmail.com>
  */
-class Pepperlillie_Nearby_Locations_i18n {
+class AJF_Nearby_Locations_i18n {
 
 	/**
 	 * Load the plugin text domain for translation.

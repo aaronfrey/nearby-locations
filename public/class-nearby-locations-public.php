@@ -10,7 +10,7 @@
  * @subpackage Nearby_Locations/public
  * @author     Aaron Frey <aaron.frey@gmail.com>
  */
-class Pepperlillie_Nearby_Locations_Public {
+class AJF_Nearby_Locations_Public {
 
 	/**
 	 * The ID of this plugin.

@@ -4,7 +4,7 @@ if (!class_exists('WP_List_Table')) {
   require_once(ABSPATH . 'wp-admin/includes/class-wp-list-table.php');
 }
 
-class Nearby_Locations_Table extends WP_List_Table {
+class AJF_Nearby_Locations_Table extends WP_List_Table {
     
   function __construct() {
 
@@ -141,10 +141,10 @@ class Nearby_Locations_Table extends WP_List_Table {
   }
 }
 
-function tt_render_list_page() {
+function ajf_nearby_locations_render_list_page() {
     
   // Create an instance of our package class...
-  $testListTable = new Nearby_Locations_Table();
+  $testListTable = new AJF_Nearby_Locations_Table();
   // Fetch, prepare, sort, and filter our data...
   $testListTable->prepare_items();
   
@@ -166,4 +166,4 @@ function tt_render_list_page() {
   <?php
 }
 
-tt_render_list_page();
+ajf_nearby_locations_render_list_page();
