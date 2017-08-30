@@ -23,6 +23,8 @@ $locations = $wpdb->get_results("
 
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
 
+<?php if (get_option('ajf-nl-google-api-key')) : ?>
+
 <div class="pl-nearby-locations-container">
 
   <div class="accordion-container">
@@ -80,3 +82,5 @@ $locations = $wpdb->get_results("
   <div id="map-canvas" class="map"></div>
 
 </div><!-- .pl-nearby-locations-container -->
+
+<?php endif; ?>
