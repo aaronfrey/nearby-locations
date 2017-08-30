@@ -30,8 +30,8 @@ class AJF_Nearby_Locations_Types_Table extends WP_List_Table {
   function column_name($item) {      
     // Build row actions
     $actions = array(
-      'edit'   => sprintf('<a href="?page=%s&action=%s&'.$this->_args['singular'].'=%s">Edit</a>', $_REQUEST['page'], 'edit', $item['id']),
-      'delete' => sprintf('<a href="?page=%s&action=%s&'.$this->_args['singular'].'=%s">Delete</a>', $_REQUEST['page'], 'delete', $item['id']),
+      'edit'   => sprintf('<a href="?page=%s&action=%s&'.$this->_args['singular'].'=%s">Edit</a>', esc_attr(sanitize_key($_REQUEST['page'])), 'edit', $item['id']),
+      'delete' => sprintf('<a href="?page=%s&action=%s&'.$this->_args['singular'].'=%s">Delete</a>', esc_attr(sanitize_key($_REQUEST['page'])), 'delete', $item['id']),
     );
     
     // Return the title contents
@@ -153,7 +153,7 @@ function ajf_nearby_locations_render_list_page() {
     
     <form method="get">
       <!-- For plugins, we also need to ensure that the form posts back to our current page -->
-      <input type="hidden" name="page" value="<?php echo esc_attr(sanitize_file_name($_REQUEST['page'])); ?>" />
+      <input type="hidden" name="page" value="<?php echo esc_attr(sanitize_key($_REQUEST['page'])); ?>" />
       <!-- Now we can render the completed list table -->
       <?php $testListTable->display(); ?>
     </form>

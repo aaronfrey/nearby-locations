@@ -244,7 +244,7 @@ class AJF_Nearby_Locations_Admin {
  * @since    1.0.0
  */
 function ajf_nearby_locations_get_menu() {
-  $current_page = isset($_REQUEST['page']) ? esc_html($_REQUEST['page']) : 'nearby-locations';
+  $current_page = isset($_REQUEST['page']) ? esc_attr(sanitize_key($_REQUEST['page'])) : 'nearby-locations';
   switch ($current_page) {
     case 'nearby-locations':					include('partials/nearby-locations-admin-display.php');						break;
     case 'nearby-locations-types': 		include('partials/nearby-locations-admin-types-display.php');			break;
