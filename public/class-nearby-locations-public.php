@@ -72,7 +72,7 @@ class AJF_Nearby_Locations_Public {
 		}
 
 		wp_enqueue_script('jquery-ui', 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js', array('jquery'), $this->version, false);
-
+		wp_enqueue_script('jquery-validate', 'https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js', array('jquery'), $this->version, false);
 		wp_enqueue_script('shared', plugin_dir_url(dirname(__FILE__)) . 'shared/js/nearby-locations-shared.js', array('jquery'), $this->version, false);
 		wp_localize_script('shared', 'myVars', array(
 			'ajaxUrl' => admin_url('admin-ajax.php'),
