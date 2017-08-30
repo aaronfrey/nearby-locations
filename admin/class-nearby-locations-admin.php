@@ -94,25 +94,27 @@ class AJF_Nearby_Locations_Admin {
       'Nearby Locations',
       'Locations',
       'manage_options',
-      plugin_dir_path(__FILE__) . 'partials/nearby-locations-admin-display.php',
-      null,
+      'nearby-locations',
+      'ajf_nearby_locations_get_menu',
       'dashicons-location'
     );
 
 		add_submenu_page(
-			plugin_dir_path(__FILE__) . 'partials/nearby-locations-admin-display.php',
+			'nearby-locations',
 			'Location Types',
 			'Location Types',
 			'manage_options',
-			plugin_dir_path(__FILE__) . 'partials/nearby-locations-admin-types-display.php'
+			'nearby-locations-types',
+			'ajf_nearby_locations_get_menu'
 		);
 
 		add_submenu_page(
-			plugin_dir_path(__FILE__) . 'partials/nearby-locations-admin-display.php',
+			'nearby-locations',
 			'Settings',
 			'Settings',
 			'manage_options',
-			plugin_dir_path(__FILE__) . 'partials/nearby-locations-admin-settings-display.php'
+			'nearby-locations-settings',
+			'ajf_nearby_locations_get_menu'
 		);
 
 	}	
@@ -234,5 +236,18 @@ class AJF_Nearby_Locations_Admin {
   private function remove_center_location() {
   	delete_option('ajf-nl-center-address');
   }
+}
 
+/**
+ * Redirects the clicked menu item to the correct location
+ *
+ * @since    1.0.0
+ */
+function ajf_nearby_locations_get_menu() {
+  $current_page = isset($_REQUEST['page']) ? esc_html($_REQUEST['page']) : 'nearby-locations';
+  switch ($current_page) {
+    case 'nearby-locations':					include('partials/nearby-locations-admin-display.php');						break;
+    case 'nearby-locations-types': 		include('partials/nearby-locations-admin-types-display.php');			break;
+    case 'nearby-locations-settings':	include('partials/nearby-locations-admin-settings-display.php');	break;
+  }
 }
