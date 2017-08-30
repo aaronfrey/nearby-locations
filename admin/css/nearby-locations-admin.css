@@ -28,3 +28,7 @@
     list-style: disc;
     margin: 0 0 0 40px;
 }
+
+#ajf-nearby-locations-message {
+	line-height: 28px;
+}

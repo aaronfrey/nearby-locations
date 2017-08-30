@@ -157,7 +157,11 @@
     if (typeof google === 'object' && typeof google.maps === 'object') {
       initialize();
     } else {
-      $('#ajf-nearby-locations-message').html('Please enter a valid Google Maps API key in Settings.');
+      if (!$('body').hasClass('locations_page_nearby-locations-settings')) {
+        $('#ajf-nearby-locations-message').html('Please enter a valid Google Maps API key in <a href="?page=nearby-locations-settings" class="button button-primary">Settings</a>');
+      } else {
+        $('#ajf-nearby-locations-message').html('Please enter a valid Google Maps API key.');
+      }
     }
 
     // validate the location form
