@@ -19,7 +19,7 @@ Add the ability to add locations to a map, based on category, in relation to a s
 
 1. Upload `nearby-locations.zip` to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Enter a valid Google API Key in Settings
+1. Enter a valid Google API Key in Locations --> Settings
 1. Place `[nearby_locations]` in your post or page or `<?php echo do_shortcode('[nearby_locations]'); ?>` in your templates
 
 == Frequently asked questions ==
@@ -30,8 +30,12 @@ Make sure you have entered a valid Google Map API key on the plugin settings pag
 
 == Screenshots ==
 
-1. 
-2. 
+1. Make sure to enter your Google Maps API in Settings.
+2. Enter an optional Featured Address that all other locations will be displayed in relation to.
+3. Add optional Location Types. Order is the order in which they will be listed on the front end.
+4. Enter named Locations and addresses organized by Location Type.
+5. Display all addressed on the front end.
+6. Or, display any locations in a selected Location Type.
 
 == Changelog ==
 
