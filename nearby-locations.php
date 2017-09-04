@@ -22,6 +22,14 @@ if (!defined('WPINC')) {
 	die;
 }
 
+function ajf_nearby_locations_add_settings_link($links) {
+  $settings_link = '<a href="admin.php?page=nearby-locations-settings">' . __('Settings') . '</a>';
+  array_push($links, $settings_link);
+	return $links;
+}
+$plugin = plugin_basename(__FILE__);
+add_filter("plugin_action_links_$plugin", 'ajf_nearby_locations_add_settings_link');
+
 /**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-nearby-locations-activator.php
@@ -59,9 +67,8 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-nearby-locations.php';
  * @since    1.0.0
  */
 function run_ajf_nearby_locations() {
-
 	$plugin = new AJF_Nearby_Locations();
 	$plugin->run();
-
 }
+
 run_ajf_nearby_locations();
