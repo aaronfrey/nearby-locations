@@ -53,10 +53,5 @@ class AJF_Nearby_Locations_Activator {
 		) $charset_collate;";
 
 		dbDelta($sql);
-
-		// Add the custom color options
-		add_option('ajf-nl-color-background', '#0073aa');
-		add_option('ajf-nl-color-panel', '#005883');
-		add_option('ajf-nl-color-text', '#ffffff');
 	}
 }

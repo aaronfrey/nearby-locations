@@ -56,13 +56,45 @@ class AJF_Nearby_Locations {
 	public function __construct() {
 
 		$this->plugin_name = 'ajf-nearby-locations';
-		$this->version = '1.0.0';
+		$this->version = '1.1.1';
 
+		$this->check_upgrade();
 		$this->load_dependencies();
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
+	}
 
+	private function check_upgrade() {
+		// Retrieve initial plugin version
+		$initial_version = get_option('ajf-nl-version', '1.0.0');
+
+		// If initial plugin version is not the current version
+		if ($initial_version !== $this->version) {
+
+			switch ($initial_version) {
+				case '1.0.0':
+					// Add the custom color option defaults
+					$background_color = get_option('ajf-nl-color-background');
+					if (!$background_color) {
+						add_option('ajf-nl-color-background', '#0073aa');
+					}
+
+					$panel_color = get_option('ajf-nl-color-panel');
+					if (!$panel_color) {
+						add_option('ajf-nl-color-panel', '#005883');
+					}
+
+					$text_color = get_option('ajf-nl-color-text');
+					if (!$text_color) {
+						add_option('ajf-nl-color-text', '#ffffff');
+					}
+				break;
+			}
+
+			// Set the new plugin version
+			update_option('ajf-nl-version', $this->version);
+		}
 	}
 
 	/**
