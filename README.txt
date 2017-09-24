@@ -43,7 +43,10 @@ Make sure you have entered a valid Google Map API key on the plugin settings pag
 * Initial release
 
 = 1.1 =
-* Added ability to customize map colors from the settings page 
+* Added ability to customize map colors from the settings page
+
+= 1.1.1 =
+* Properly update options based on current version
 
 == Upgrade notice ==
 
