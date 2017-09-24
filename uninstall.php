@@ -25,6 +25,7 @@ $table_name = $wpdb->prefix . 'ajf_nl_sections';
 $wpdb->query("DROP TABLE IF EXISTS $table_name");
 
 // Delete Options
+delete_option('ajf-nl-version');
 delete_option('ajf-nl-google-api-key');
 delete_option('ajf-nl-center-address');
 delete_option('ajf-nl-color-background');
