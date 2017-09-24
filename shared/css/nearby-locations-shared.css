@@ -7,7 +7,6 @@ a:focus {
 .pl-nearby-locations-container {
   max-width: 95%;
   overflow: auto;
-  background-color: #00b54e;
 }
 
 .pl-nearby-locations-container .accordion-container {
@@ -19,7 +18,6 @@ a:focus {
 
 .pl-nearby-locations-container .accordion-container a {
   text-decoration: none;
-  color: #fff;
   display: block;
 }
 
@@ -37,7 +35,6 @@ a:focus {
 
 .pl-nearby-locations-container .accordion-container .ui-accordion .ui-accordion-header {
   border-radius: 0;
-  background: #00b54e;
   color: #fff;
   text-transform: uppercase;
   margin: 0;
@@ -59,12 +56,10 @@ a:focus {
 .pl-nearby-locations-container .accordion-container .ui-accordion .ui-accordion-content {
   border-radius: 0;
   border: none;
-  background-color: #038138;
-  padding: 1em 0.25em;
+  padding: 10px 15px 5px 0;
 }
 
 .pl-nearby-locations-container .accordion-container .ui-accordion .ui-accordion-content ul {
-  color: #fff;
   margin-bottom: 0;
 }
 

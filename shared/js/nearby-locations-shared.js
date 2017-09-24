@@ -217,6 +217,11 @@
           'callback': 'update_settings',
           'api-key': $('#api-key').val(),
           'center-address': centerAddress,
+          'colors': {
+            'background': $('#sidebar-background-color').val(),
+            'panel': $('#sidebar-panel-color').val(),
+            'text': $('#sidebar-text-color').val()
+          }
         };
 
         // save the location type to the database

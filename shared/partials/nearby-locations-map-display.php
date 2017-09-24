@@ -10,8 +10,8 @@
 
 // Get all of the location types
 global $wpdb;
-$table_name = $wpdb->prefix . "ajf_nl_sections"; 
-$join_table_name = $wpdb->prefix . "ajf_nl_locations"; 
+$table_name = $wpdb->prefix . 'ajf_nl_sections'; 
+$join_table_name = $wpdb->prefix . 'ajf_nl_locations'; 
 $locations = $wpdb->get_results("
   SELECT `locations`.*, `sections`.name `section_name`
   FROM $join_table_name `locations`
@@ -19,17 +19,29 @@ $locations = $wpdb->get_results("
   ORDER BY `sections`.`order` ASC, `locations`.name
 ", OBJECT);
 
+if (get_option('ajf-nl-google-api-key')) :
+  $background_color = get_option('ajf-nl-color-background');
+  $panel_color = get_option('ajf-nl-color-panel');
+  $text_color = get_option('ajf-nl-color-text');
 ?>
 
-<!-- This file should primarily consist of HTML with a little bit of PHP. -->
+<style type="text/css">
+  .ui-widget-content a {
+    color: <?php echo $text_color; ?>;
+  }
+  .ui-accordion .ui-accordion-content {
+    background-color: <?php echo $panel_color; ?>;
+  }
+  .ui-accordion .ui-accordion-content ul {
+    color: <?php echo $text_color; ?>;
+  }
+</style>
 
-<?php if (get_option('ajf-nl-google-api-key')) : ?>
-
-<div class="pl-nearby-locations-container">
+<div class="pl-nearby-locations-container" style="background-color:<?php echo $background_color; ?>;">
 
   <div class="accordion-container">
 
-    <a href="#" id="toggle-all" class="toggle-all">ALL</a>
+    <a href="#" id="toggle-all" class="toggle-all" style="color: <?php echo $text_color; ?>;">ALL</a>
 
     <?php if ($locations) : ?>
 
@@ -51,7 +63,8 @@ $locations = $wpdb->get_results("
 
             $current_location_type = $location->section_id; ?>
 
-            <h3 data-section-id="<?php echo esc_attr($location->section_id); ?>">
+            <h3 data-section-id="<?php echo esc_attr($location->section_id); ?>"
+              style="background: <?php echo $background_color; ?>; color: <?php echo $text_color; ?>">
               <?php echo esc_html($location->section_name); ?>
             </h3>
             <div>
