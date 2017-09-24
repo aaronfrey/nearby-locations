@@ -8,7 +8,7 @@
  * @wordpress-plugin
  * Plugin Name:       Nearby Locations
  * Description:       Add locations, grouped by categories, to a Google map.
- * Version:           1.0.0
+ * Version:           1.1.0
  * Author:            Aaron Frey
  * Author URI:        http://www.aaronjfrey.com/
  * License:           GPL-2.0+

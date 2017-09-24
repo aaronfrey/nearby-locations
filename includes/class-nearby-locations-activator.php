@@ -40,7 +40,7 @@ class AJF_Nearby_Locations_Activator {
 		  PRIMARY KEY  (id)
 		) $charset_collate;";
 
-		dbDelta( $sql );
+		dbDelta($sql);
 
 		// Create the sections table
 		$table_name = $wpdb->prefix . "ajf_nl_sections"; 
@@ -52,6 +52,11 @@ class AJF_Nearby_Locations_Activator {
 		  PRIMARY KEY  (id)
 		) $charset_collate;";
 
-		dbDelta( $sql );
+		dbDelta($sql);
+
+		// Add the custom color options
+		add_option('ajf-nl-color-background', '#0073aa');
+		add_option('ajf-nl-color-panel', '#005883');
+		add_option('ajf-nl-color-text', '#ffffff');
 	}
 }

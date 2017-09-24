@@ -58,6 +58,9 @@ class AJF_Nearby_Locations_Admin {
 	 * @since    1.0.0
 	 */
 	public function enqueue_styles() {
+		// Add the color picker css file       
+    wp_enqueue_style('wp-color-picker'); 
+
 		wp_enqueue_style('jquery-ui', 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css', array(), $this->version, 'all');
 
 		wp_enqueue_style('shared', plugin_dir_url(dirname(__FILE__)) . 'shared/css/nearby-locations-shared.css', array(), $this->version, 'all');
@@ -86,7 +89,7 @@ class AJF_Nearby_Locations_Admin {
 			'pluginsUrl' => plugins_url(),
 		));
 
-		wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/nearby-locations-admin.js', array('jquery'), $this->version, false);
+		wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/nearby-locations-admin.js', array('jquery', 'wp-color-picker'), $this->version, false);
 	}
 
 	public function ajf_nearby_locations_page() {
@@ -216,6 +219,7 @@ class AJF_Nearby_Locations_Admin {
 
   private function update_settings() {
   	
+  	// Update api key and featured address if present
   	$api_key = sanitize_text_field($_POST['api-key']);
   	update_option('ajf-nl-google-api-key', $api_key);
 
@@ -231,11 +235,37 @@ class AJF_Nearby_Locations_Admin {
 	  	];
   		update_option('ajf-nl-center-address', $center_address);
   	}
+
+  	// Update colors
+  	if ($background_color = $this->validate_color($_POST['colors']['background'])) {
+  		update_option('ajf-nl-color-background', $background_color);
+  	}
+
+  	if ($panel_color = $this->validate_color($_POST['colors']['panel'])) {
+  		update_option('ajf-nl-color-panel', $panel_color);
+  	}
+
+  	if ($text_color = $this->validate_color($_POST['colors']['text'])) {
+  		update_option('ajf-nl-color-text', $text_color);
+  	}
+
   }
 
   private function remove_center_location() {
   	delete_option('ajf-nl-center-address');
   }
+
+	private function validate_color($color) { 
+
+	  $color = sanitize_text_field($color);
+
+	  // Check if is a valid hex color
+	  if (preg_match('/^#[a-f0-9]{6}$/i', $color) !== 1) {
+	    return false;
+	  }
+	  return $color;
+	}
+
 }
 
 /**

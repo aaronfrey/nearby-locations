@@ -120,11 +120,8 @@ class AJF_Nearby_Locations {
 	 * @access   private
 	 */
 	private function set_locale() {
-
 		$plugin_i18n = new AJF_Nearby_Locations_i18n();
-
 		$this->loader->add_action('plugins_loaded', $plugin_i18n, 'load_plugin_textdomain');
-
 	}
 
 	/**
@@ -136,14 +133,17 @@ class AJF_Nearby_Locations {
 	 */
 	private function define_admin_hooks() {
 
-		$plugin_admin = new AJF_Nearby_Locations_Admin( $this->get_plugin_name(), $this->get_version());
+		if (is_admin()) {
+			
+			$plugin_admin = new AJF_Nearby_Locations_Admin($this->get_plugin_name(), $this->get_version());
 
-		$this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_styles');
-		$this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts');
+			$this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_styles');
+			$this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts');
 
-		$this->loader->add_action('admin_menu', $plugin_admin, 'ajf_nearby_locations_page');
-		$this->loader->add_action('wp_ajax_nopriv_nearby_locations_crud', $plugin_admin, 'ajf_nearby_locations_process_ajax');
-		$this->loader->add_action('wp_ajax_nearby_locations_crud', $plugin_admin, 'ajf_nearby_locations_process_ajax');
+			$this->loader->add_action('admin_menu', $plugin_admin, 'ajf_nearby_locations_page');
+			$this->loader->add_action('wp_ajax_nopriv_nearby_locations_crud', $plugin_admin, 'ajf_nearby_locations_process_ajax');
+			$this->loader->add_action('wp_ajax_nearby_locations_crud', $plugin_admin, 'ajf_nearby_locations_process_ajax');
+		}
 	}
 
 	/**
@@ -154,6 +154,7 @@ class AJF_Nearby_Locations {
 	 * @access   private
 	 */
 	private function define_public_hooks() {
+
 		$plugin_public = new AJF_Nearby_Locations_Public( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_styles');

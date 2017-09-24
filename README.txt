@@ -5,7 +5,7 @@ Tags: maps, locations
 Requires at least: 3.3
 Tested up to: 4.8.1
 Requires PHP: 5.6
-Stable tag: 1.0
+Stable tag: 1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -41,6 +41,9 @@ Make sure you have entered a valid Google Map API key on the plugin settings pag
 
 = 1.0 =
 * Initial release
+
+= 1.1 =
+* Added ability to customize map colors from the settings page 
 
 == Upgrade notice ==
 
